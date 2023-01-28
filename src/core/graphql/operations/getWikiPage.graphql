@@ -1,0 +1,10 @@
+query getWikiPage($id: ID) {
+  wikiPage(id: $id) {
+    data {
+      id
+      attributes {
+        ...wikiPageAttributes
+      }
+    }
+  }
+}

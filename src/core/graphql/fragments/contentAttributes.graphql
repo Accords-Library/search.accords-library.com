@@ -1,0 +1,46 @@
+fragment contentAttributes on Content {
+  slug
+  updatedAt
+  translations(pagination: { limit: -1 }) {
+    pre_title
+    title
+    subtitle
+    description
+    language {
+      data {
+        attributes {
+          code
+        }
+      }
+    }
+    text_set {
+      text
+    }
+  }
+  categories(pagination: { limit: -1 }) {
+    data {
+      id
+      attributes {
+        name
+        short
+      }
+    }
+  }
+  type {
+    data {
+      attributes {
+        slug
+        titles(filters: { language: { code: { eq: "en" } } }) {
+          title
+        }
+      }
+    }
+  }
+  thumbnail {
+    data {
+      attributes {
+        ...uploadImage
+      }
+    }
+  }
+}

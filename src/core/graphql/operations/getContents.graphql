@@ -1,0 +1,10 @@
+query getContents {
+  contents(pagination: { limit: -1 }) {
+    data {
+      id
+      attributes {
+        ...contentAttributes
+      }
+    }
+  }
+}

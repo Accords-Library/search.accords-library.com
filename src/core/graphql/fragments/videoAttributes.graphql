@@ -1,0 +1,21 @@
+fragment videoAttributes on Video {
+  uid
+  title
+  description
+  published_date {
+    year
+    month
+    day
+  }
+  views
+  channel {
+    data {
+      attributes {
+        title
+        uid
+      }
+    }
+  }
+  gone
+  duration
+}

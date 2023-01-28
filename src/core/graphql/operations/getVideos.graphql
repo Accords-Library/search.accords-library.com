@@ -1,0 +1,10 @@
+query getVideos {
+  videos(pagination: { limit: -1 }) {
+    data {
+      id
+      attributes {
+        ...videoAttributes
+      }
+    }
+  }
+}

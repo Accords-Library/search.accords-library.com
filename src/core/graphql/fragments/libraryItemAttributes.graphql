@@ -1,0 +1,110 @@
+fragment libraryItemAttributes on LibraryItem {
+  title
+  subtitle
+  slug
+  root_item
+  primary
+  descriptions(pagination: { limit: -1 }) {
+    description
+    language {
+      data {
+        attributes {
+          code
+        }
+      }
+    }
+  }
+  thumbnail {
+    data {
+      attributes {
+        ...uploadImage
+      }
+    }
+  }
+  release_date {
+    ...datePicker
+  }
+  price {
+    ...pricePicker
+  }
+  categories(pagination: { limit: -1 }) {
+    data {
+      id
+      attributes {
+        name
+        short
+      }
+    }
+  }
+  metadata {
+    __typename
+    ... on ComponentMetadataBooks {
+      subtype {
+        data {
+          attributes {
+            slug
+            titles(filters: { language: { code: { eq: "en" } } }) {
+              title
+            }
+          }
+        }
+      }
+    }
+    ... on ComponentMetadataGame {
+      platforms(pagination: { limit: -1 }) {
+        data {
+          id
+          attributes {
+            short
+          }
+        }
+      }
+    }
+    ... on ComponentMetadataVideo {
+      subtype {
+        data {
+          attributes {
+            slug
+            titles(filters: { language: { code: { eq: "en" } } }) {
+              title
+            }
+          }
+        }
+      }
+    }
+    ... on ComponentMetadataAudio {
+      subtype {
+        data {
+          attributes {
+            slug
+            titles(filters: { language: { code: { eq: "en" } } }) {
+              title
+            }
+          }
+        }
+      }
+    }
+    ... on ComponentMetadataGroup {
+      subtype {
+        data {
+          attributes {
+            slug
+            titles(filters: { language: { code: { eq: "en" } } }) {
+              title
+            }
+          }
+        }
+      }
+      subitems_type {
+        data {
+          attributes {
+            slug
+            titles(filters: { language: { code: { eq: "en" } } }) {
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+}

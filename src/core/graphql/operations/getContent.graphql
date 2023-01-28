@@ -1,0 +1,10 @@
+query getContent($id: ID) {
+  content(id: $id) {
+    data {
+      id
+      attributes {
+        ...contentAttributes
+      }
+    }
+  }
+}

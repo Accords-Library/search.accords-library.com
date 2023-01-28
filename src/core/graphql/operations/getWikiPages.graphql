@@ -1,0 +1,10 @@
+query getWikiPages {
+  wikiPages(pagination: { limit: -1 }) {
+    data {
+      id
+      attributes {
+        ...wikiPageAttributes
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+query getVideo($id: ID) {
+  video(id: $id) {
+    data {
+      id
+      attributes {
+        ...videoAttributes
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+fragment wikiPageAttributes on WikiPage {
+  slug
+  thumbnail {
+    data {
+      attributes {
+        ...uploadImage
+      }
+    }
+  }
+  categories(pagination: { limit: -1 }) {
+    data {
+      id
+      attributes {
+        name
+        short
+      }
+    }
+  }
+  definitions(pagination: { limit: -1 }) {
+    translations {
+      language {
+        data {
+          attributes {
+            code
+          }
+        }
+      }
+      definition
+    }
+  }
+  tags(pagination: { limit: -1 }) {
+    data {
+      id
+      attributes {
+        slug
+        titles(filters: { language: { code: { eq: "en" } } }) {
+          language {
+            data {
+              attributes {
+                code
+              }
+            }
+          }
+          title
+        }
+      }
+    }
+  }
+  translations(pagination: { limit: -1 }) {
+    title
+    aliases {
+      alias
+    }
+    body {
+      body
+    }
+    summary
+    language {
+      data {
+        attributes {
+          code
+        }
+      }
+    }
+  }
+}

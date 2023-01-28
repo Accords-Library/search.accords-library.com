@@ -1,0 +1,10 @@
+query getLibraryItem($id: ID) {
+  libraryItem(id: $id) {
+    data {
+      id
+      attributes {
+        ...libraryItemAttributes
+      }
+    }
+  }
+}

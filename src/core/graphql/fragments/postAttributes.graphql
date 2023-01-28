@@ -1,0 +1,41 @@
+fragment postAttributes on Post {
+  slug
+  hidden
+  date {
+    ...datePicker
+  }
+  categories(pagination: { limit: -1 }) {
+    data {
+      id
+      attributes {
+        short
+      }
+    }
+  }
+  thumbnail {
+    data {
+      attributes {
+        ...uploadImage
+      }
+    }
+  }
+  translations(pagination: { limit: -1 }) {
+    language {
+      data {
+        attributes {
+          code
+        }
+      }
+    }
+    title
+    excerpt
+    body
+    thumbnail {
+      data {
+        attributes {
+          ...uploadImage
+        }
+      }
+    }
+  }
+}

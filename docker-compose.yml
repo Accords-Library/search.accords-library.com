@@ -1,0 +1,8 @@
+version: "3.3"
+services:
+  meilisearch:
+    image: "getmeili/meilisearch:latest"
+    ports:
+      - "61876:7700"
+    volumes:
+      - "./meili_data:/meili_data"
