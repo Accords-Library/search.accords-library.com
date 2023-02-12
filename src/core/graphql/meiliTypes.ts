@@ -79,7 +79,7 @@ export enum MeiliIndices {
   VIDEOS = "video",
   POST = "post",
   WIKI_PAGE = "wiki-page",
-  WEAPON = "weapon",
+  WEAPON = "weapon-story",
 }
 
 export type MeiliDocumentsType =
