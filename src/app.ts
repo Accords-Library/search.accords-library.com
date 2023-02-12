@@ -1,8 +1,9 @@
 import http from "http";
+import { config } from "dotenv";
 import { requestListener } from "./server";
 import { synchronizeStrapiAndMeili } from "./syncho";
-import * as dotenv from "dotenv";
-dotenv.config();
+
+config();
 
 await synchronizeStrapiAndMeili();
 

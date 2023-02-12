@@ -1,0 +1,4 @@
+.eslintrc.js
+graphql-codegen.config.js
+prettier.config.js
+src/core/graphql/generated.ts

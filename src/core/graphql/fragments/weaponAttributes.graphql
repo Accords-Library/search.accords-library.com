@@ -1,0 +1,65 @@
+fragment weaponAttributes on WeaponStory {
+  thumbnail {
+    data {
+      attributes {
+        ...uploadImage
+      }
+    }
+  }
+  type {
+    data {
+      id
+      attributes {
+        slug
+        translations(filters: { language: { code: { eq: "en" } } }) {
+          name
+          language {
+            data {
+              attributes {
+                code
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  name(pagination: { limit: -1 }) {
+    id
+    name
+    language {
+      data {
+        attributes {
+          code
+        }
+      }
+    }
+  }
+  slug
+  stories(pagination: { limit: -1 }) {
+    id
+    categories(pagination: { limit: -1 }) {
+      data {
+        id
+        attributes {
+          short
+        }
+      }
+    }
+    translations(pagination: { limit: -1 }) {
+      description
+      level_1
+      level_2
+      level_3
+      level_4
+      status
+      language {
+        data {
+          attributes {
+            code
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,9 +1,4 @@
-import {
-  MeiliContent,
-  MeiliDocumentsType,
-  MeiliIndices,
-  MeiliWikiPage,
-} from "core/graphql/meiliTypes";
+import { MeiliDocumentsType, MeiliIndices, MeiliWeapon } from "core/graphql/meiliTypes";
 import {
   filterDefined,
   filterHasAttributes,
@@ -15,7 +10,7 @@ import { prettyInlineTitle } from "core/helpers/formatters";
 import { isUntangibleGroupItem } from "core/helpers/libraryItem";
 import { MeiliSearch } from "meilisearch";
 
-export const getMeili = () =>
+export const getMeili = (): MeiliSearch =>
   new MeiliSearch({
     host: process.env.MEILISEARCH_URL ?? "",
     apiKey: process.env.MEILISEARCH_MASTER_KEY,
@@ -134,10 +129,61 @@ const transformWikiPage: TransformFunction<MeiliIndices.WIKI_PAGE> = (data) => {
   };
 };
 
+const transformWeapon: TransformFunction<MeiliIndices.WEAPON> = (data) => {
+  if (!data) throw new Error(`Data is empty ${MeiliIndices.WEAPON}`);
+  if (!data.attributes || !data.id)
+    throw new Error(`Incorrect data stucture on ${MeiliIndices.WEAPON}`);
+  const {
+    id: weaponID,
+    attributes: { name: names, stories, ...otherAttributes },
+  } = data;
+
+  const categories = new Map<string, MeiliWeapon["categories"][number]>();
+
+  stories?.forEach((story) => {
+    filterHasAttributes(story?.categories?.data, ["id"] as const).forEach((category) => {
+      categories.set(category.id, category);
+    });
+  });
+
+  const translations = new Map<string, MeiliWeapon["translations"][number]>();
+
+  stories?.forEach((story) => {
+    filterHasAttributes(story?.translations, ["language.data.attributes.code"] as const).forEach(
+      ({ language, description, level_1, level_2, level_3, level_4 }) => {
+        const langCode = language.data.attributes.code;
+        const currentTranslation = translations.get(langCode) ?? {
+          id: langCode,
+          description: "",
+          language,
+          names: filterHasAttributes(names, ["name"] as const)
+            .filter((name) => name.language?.data?.attributes?.code === langCode)
+            .map((name) => name.name),
+        };
+
+        currentTranslation.description += [description, level_1, level_2, level_3, level_4]
+          .filter(isDefinedAndNotEmpty)
+          .map((item) => `${item}\n`);
+
+        translations.set(langCode, currentTranslation);
+      }
+    );
+  });
+
+  const result: MeiliWeapon = {
+    id: weaponID,
+    ...otherAttributes,
+    categories: [...categories.values()],
+    translations: [...translations.values()],
+  };
+  return result;
+};
+
 export const strapiToMeiliTransformFunctions = {
   video: transformVideo,
-  "library-item": transformLibraryItem,
+  libraryItem: transformLibraryItem,
   content: transformContent,
   post: transformPost,
-  "wiki-page": transformWikiPage,
+  wikiPage: transformWikiPage,
+  weapon: transformWeapon,
 };

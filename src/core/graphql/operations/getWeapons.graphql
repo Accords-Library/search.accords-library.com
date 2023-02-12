@@ -1,0 +1,10 @@
+query getWeapons {
+  weaponStories(pagination: { limit: -1 }) {
+    data {
+      id
+      attributes {
+        ...weaponAttributes
+      }
+    }
+  }
+}

@@ -15,7 +15,10 @@ type StrapiEvent = {
   };
 };
 
-export const webhookHandler = async (data: StrapiEvent, res: http.ServerResponse) => {
+export const webhookHandler = async (
+  data: StrapiEvent,
+  res: http.ServerResponse
+): Promise<void> => {
   console.log(data);
 
   if (!allowedEvents.includes(data.event)) {
@@ -33,7 +36,7 @@ export const webhookHandler = async (data: StrapiEvent, res: http.ServerResponse
     case MeiliIndices.LIBRARY_ITEM: {
       processIndex(
         data.model,
-        strapiToMeiliTransformFunctions["library-item"](
+        strapiToMeiliTransformFunctions.libraryItem(
           (await sdk.getLibraryItem({ id: data.entry.id })).libraryItem?.data
         )
       );
@@ -43,7 +46,7 @@ export const webhookHandler = async (data: StrapiEvent, res: http.ServerResponse
     case MeiliIndices.CONTENT: {
       processIndex(
         data.model,
-        strapiToMeiliTransformFunctions["content"](
+        strapiToMeiliTransformFunctions.content(
           (await sdk.getContent({ id: data.entry.id })).content?.data
         )
       );
@@ -53,7 +56,7 @@ export const webhookHandler = async (data: StrapiEvent, res: http.ServerResponse
     case MeiliIndices.VIDEOS: {
       processIndex(
         data.model,
-        strapiToMeiliTransformFunctions["video"](
+        strapiToMeiliTransformFunctions.video(
           (await sdk.getVideo({ id: data.entry.id })).video?.data
         )
       );
@@ -63,9 +66,7 @@ export const webhookHandler = async (data: StrapiEvent, res: http.ServerResponse
     case MeiliIndices.POST: {
       processIndex(
         data.model,
-        strapiToMeiliTransformFunctions["post"](
-          (await sdk.getPost({ id: data.entry.id })).post?.data
-        )
+        strapiToMeiliTransformFunctions.post((await sdk.getPost({ id: data.entry.id })).post?.data)
       );
       break;
     }
@@ -73,8 +74,18 @@ export const webhookHandler = async (data: StrapiEvent, res: http.ServerResponse
     case MeiliIndices.WIKI_PAGE: {
       processIndex(
         data.model,
-        strapiToMeiliTransformFunctions["wiki-page"](
+        strapiToMeiliTransformFunctions.wikiPage(
           (await sdk.getWikiPage({ id: data.entry.id })).wikiPage?.data
+        )
+      );
+      break;
+    }
+
+    case MeiliIndices.WEAPON: {
+      processIndex(
+        data.model,
+        strapiToMeiliTransformFunctions.weapon(
+          (await sdk.getWeapon({ id: data.entry.id })).weaponStory?.data
         )
       );
       break;
@@ -89,7 +100,7 @@ export const webhookHandler = async (data: StrapiEvent, res: http.ServerResponse
 
 const processIndex = async <I extends MeiliDocumentsType["index"]>(
   indexName: I,
-  data: Extract<MeiliDocumentsType, { index: I }>["documents"] | undefined | null
+  data: Extract<MeiliDocumentsType, { index: I }>["documents"] | null | undefined
 ) => {
   const meili = getMeili();
   const index = meili.index(indexName);

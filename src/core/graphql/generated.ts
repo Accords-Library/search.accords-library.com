@@ -4875,7 +4875,7 @@ export type WeaponStory = {
   __typename?: 'WeaponStory';
   createdAt?: Maybe<Scalars['DateTime']>;
   name?: Maybe<Array<Maybe<ComponentTranslationsWeaponStory>>>;
-  slug?: Maybe<Scalars['String']>;
+  slug: Scalars['String'];
   stories?: Maybe<Array<Maybe<ComponentCollectionsComponentWeaponStory>>>;
   thumbnail?: Maybe<UploadFileEntityResponse>;
   type?: Maybe<WeaponStoryTypeEntityResponse>;
@@ -4934,8 +4934,17 @@ export type WeaponStoryGroup = {
   __typename?: 'WeaponStoryGroup';
   createdAt?: Maybe<Scalars['DateTime']>;
   slug: Scalars['String'];
+  subgroup_of?: Maybe<WeaponStoryGroupEntityResponse>;
+  subgroups?: Maybe<WeaponStoryGroupRelationResponseCollection>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   weapons?: Maybe<WeaponStoryRelationResponseCollection>;
+};
+
+
+export type WeaponStoryGroupSubgroupsArgs = {
+  filters?: InputMaybe<WeaponStoryGroupFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
@@ -4969,13 +4978,22 @@ export type WeaponStoryGroupFiltersInput = {
   not?: InputMaybe<WeaponStoryGroupFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<WeaponStoryGroupFiltersInput>>>;
   slug?: InputMaybe<StringFilterInput>;
+  subgroup_of?: InputMaybe<WeaponStoryGroupFiltersInput>;
+  subgroups?: InputMaybe<WeaponStoryGroupFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   weapons?: InputMaybe<WeaponStoryFiltersInput>;
 };
 
 export type WeaponStoryGroupInput = {
   slug?: InputMaybe<Scalars['String']>;
+  subgroup_of?: InputMaybe<Scalars['ID']>;
+  subgroups?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   weapons?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+};
+
+export type WeaponStoryGroupRelationResponseCollection = {
+  __typename?: 'WeaponStoryGroupRelationResponseCollection';
+  data: Array<WeaponStoryGroupEntity>;
 };
 
 export type WeaponStoryInput = {
@@ -5127,7 +5145,6 @@ export type WebsiteInterface = {
   binding?: Maybe<Scalars['String']>;
   book_fold?: Maybe<Scalars['String']>;
   calculated?: Maybe<Scalars['String']>;
-  categories?: Maybe<Scalars['String']>;
   category?: Maybe<Scalars['String']>;
   change_language?: Maybe<Scalars['String']>;
   channel?: Maybe<Scalars['String']>;
@@ -5149,8 +5166,9 @@ export type WebsiteInterface = {
   createdAt?: Maybe<Scalars['DateTime']>;
   currency?: Maybe<Scalars['String']>;
   dark?: Maybe<Scalars['String']>;
+  dark_mode_extension_warning?: Maybe<Scalars['String']>;
   default_description?: Maybe<Scalars['String']>;
-  definition?: Maybe<Scalars['String']>;
+  definition_x?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   details?: Maybe<Scalars['String']>;
   display_all_items?: Maybe<Scalars['String']>;
@@ -5166,7 +5184,6 @@ export type WebsiteInterface = {
   font_size?: Maybe<Scalars['String']>;
   front_matter?: Maybe<Scalars['String']>;
   gallery?: Maybe<Scalars['String']>;
-  gallery_description?: Maybe<Scalars['String']>;
   game?: Maybe<Scalars['String']>;
   group?: Maybe<Scalars['String']>;
   group_by?: Maybe<Scalars['String']>;
@@ -5176,10 +5193,7 @@ export type WebsiteInterface = {
   incomplete?: Maybe<Scalars['String']>;
   item?: Maybe<Scalars['String']>;
   item_not_available?: Maybe<Scalars['String']>;
-  items?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
-  language_switch_message?: Maybe<Scalars['String']>;
-  languages?: Maybe<Scalars['String']>;
   least_popular?: Maybe<Scalars['String']>;
   left_to_right?: Maybe<Scalars['String']>;
   legality?: Maybe<Scalars['String']>;
@@ -5191,9 +5205,6 @@ export type WebsiteInterface = {
   lighting?: Maybe<Scalars['String']>;
   listen_content?: Maybe<Scalars['String']>;
   longest?: Maybe<Scalars['String']>;
-  members?: Maybe<Scalars['String']>;
-  merch?: Maybe<Scalars['String']>;
-  merch_description?: Maybe<Scalars['String']>;
   message?: Maybe<Scalars['String']>;
   most_popular?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -5201,11 +5212,8 @@ export type WebsiteInterface = {
   news?: Maybe<Scalars['String']>;
   news_description?: Maybe<Scalars['String']>;
   night_reader?: Maybe<Scalars['String']>;
-  no_category?: Maybe<Scalars['String']>;
   no_results_message?: Maybe<Scalars['String']>;
   no_source_warning?: Maybe<Scalars['String']>;
-  no_type?: Maybe<Scalars['String']>;
-  no_year?: Maybe<Scalars['String']>;
   notes?: Maybe<Scalars['String']>;
   oldest?: Maybe<Scalars['String']>;
   only_display_items_i_have?: Maybe<Scalars['String']>;
@@ -5220,7 +5228,6 @@ export type WebsiteInterface = {
   page?: Maybe<Scalars['String']>;
   page_not_found?: Maybe<Scalars['String']>;
   page_order?: Maybe<Scalars['String']>;
-  pages?: Maybe<Scalars['String']>;
   paper_texture?: Maybe<Scalars['String']>;
   paperback?: Maybe<Scalars['String']>;
   player_name?: Maybe<Scalars['String']>;
@@ -5239,9 +5246,7 @@ export type WebsiteInterface = {
   response_email_success?: Maybe<Scalars['String']>;
   response_invalid_code?: Maybe<Scalars['String']>;
   response_invalid_email?: Maybe<Scalars['String']>;
-  result?: Maybe<Scalars['String']>;
-  results?: Maybe<Scalars['String']>;
-  return_to?: Maybe<Scalars['String']>;
+  return_to_x?: Maybe<Scalars['String']>;
   review?: Maybe<Scalars['String']>;
   right_to_left?: Maybe<Scalars['String']>;
   scan?: Maybe<Scalars['String']>;
@@ -5260,6 +5265,7 @@ export type WebsiteInterface = {
   show_primary_items?: Maybe<Scalars['String']>;
   show_secondary_items?: Maybe<Scalars['String']>;
   show_subitems?: Maybe<Scalars['String']>;
+  showing_x_out_of_y_results?: Maybe<Scalars['String']>;
   side_pages?: Maybe<Scalars['String']>;
   single_page_view?: Maybe<Scalars['String']>;
   size?: Maybe<Scalars['String']>;
@@ -5272,8 +5278,7 @@ export type WebsiteInterface = {
   status_incomplete?: Maybe<Scalars['String']>;
   status_review?: Maybe<Scalars['String']>;
   subitem?: Maybe<Scalars['String']>;
-  subitem_of?: Maybe<Scalars['String']>;
-  subitems?: Maybe<Scalars['String']>;
+  subitem_of_x?: Maybe<Scalars['String']>;
   subscribers?: Maybe<Scalars['String']>;
   summary?: Maybe<Scalars['String']>;
   switch_to_folder_view?: Maybe<Scalars['String']>;
@@ -5293,8 +5298,7 @@ export type WebsiteInterface = {
   ui_language?: Maybe<LanguageEntityResponse>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   variant?: Maybe<Scalars['String']>;
-  variant_of?: Maybe<Scalars['String']>;
-  variants?: Maybe<Scalars['String']>;
+  variant_of_x?: Maybe<Scalars['String']>;
   video?: Maybe<Scalars['String']>;
   videos?: Maybe<Scalars['String']>;
   view_on?: Maybe<Scalars['String']>;
@@ -5305,6 +5309,7 @@ export type WebsiteInterface = {
   wiki?: Maybe<Scalars['String']>;
   wiki_description?: Maybe<Scalars['String']>;
   wiki_short_description?: Maybe<Scalars['String']>;
+  x_results?: Maybe<Scalars['String']>;
 };
 
 export type WebsiteInterfaceEntity = {
@@ -5341,7 +5346,6 @@ export type WebsiteInterfaceFiltersInput = {
   binding?: InputMaybe<StringFilterInput>;
   book_fold?: InputMaybe<StringFilterInput>;
   calculated?: InputMaybe<StringFilterInput>;
-  categories?: InputMaybe<StringFilterInput>;
   category?: InputMaybe<StringFilterInput>;
   change_language?: InputMaybe<StringFilterInput>;
   channel?: InputMaybe<StringFilterInput>;
@@ -5363,8 +5367,9 @@ export type WebsiteInterfaceFiltersInput = {
   createdAt?: InputMaybe<DateTimeFilterInput>;
   currency?: InputMaybe<StringFilterInput>;
   dark?: InputMaybe<StringFilterInput>;
+  dark_mode_extension_warning?: InputMaybe<StringFilterInput>;
   default_description?: InputMaybe<StringFilterInput>;
-  definition?: InputMaybe<StringFilterInput>;
+  definition_x?: InputMaybe<StringFilterInput>;
   description?: InputMaybe<StringFilterInput>;
   details?: InputMaybe<StringFilterInput>;
   display_all_items?: InputMaybe<StringFilterInput>;
@@ -5380,7 +5385,6 @@ export type WebsiteInterfaceFiltersInput = {
   font_size?: InputMaybe<StringFilterInput>;
   front_matter?: InputMaybe<StringFilterInput>;
   gallery?: InputMaybe<StringFilterInput>;
-  gallery_description?: InputMaybe<StringFilterInput>;
   game?: InputMaybe<StringFilterInput>;
   group?: InputMaybe<StringFilterInput>;
   group_by?: InputMaybe<StringFilterInput>;
@@ -5391,10 +5395,7 @@ export type WebsiteInterfaceFiltersInput = {
   incomplete?: InputMaybe<StringFilterInput>;
   item?: InputMaybe<StringFilterInput>;
   item_not_available?: InputMaybe<StringFilterInput>;
-  items?: InputMaybe<StringFilterInput>;
   language?: InputMaybe<StringFilterInput>;
-  language_switch_message?: InputMaybe<StringFilterInput>;
-  languages?: InputMaybe<StringFilterInput>;
   least_popular?: InputMaybe<StringFilterInput>;
   left_to_right?: InputMaybe<StringFilterInput>;
   legality?: InputMaybe<StringFilterInput>;
@@ -5406,9 +5407,6 @@ export type WebsiteInterfaceFiltersInput = {
   lighting?: InputMaybe<StringFilterInput>;
   listen_content?: InputMaybe<StringFilterInput>;
   longest?: InputMaybe<StringFilterInput>;
-  members?: InputMaybe<StringFilterInput>;
-  merch?: InputMaybe<StringFilterInput>;
-  merch_description?: InputMaybe<StringFilterInput>;
   message?: InputMaybe<StringFilterInput>;
   most_popular?: InputMaybe<StringFilterInput>;
   name?: InputMaybe<StringFilterInput>;
@@ -5416,11 +5414,8 @@ export type WebsiteInterfaceFiltersInput = {
   news?: InputMaybe<StringFilterInput>;
   news_description?: InputMaybe<StringFilterInput>;
   night_reader?: InputMaybe<StringFilterInput>;
-  no_category?: InputMaybe<StringFilterInput>;
   no_results_message?: InputMaybe<StringFilterInput>;
   no_source_warning?: InputMaybe<StringFilterInput>;
-  no_type?: InputMaybe<StringFilterInput>;
-  no_year?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<WebsiteInterfaceFiltersInput>;
   notes?: InputMaybe<StringFilterInput>;
   oldest?: InputMaybe<StringFilterInput>;
@@ -5437,7 +5432,6 @@ export type WebsiteInterfaceFiltersInput = {
   page?: InputMaybe<StringFilterInput>;
   page_not_found?: InputMaybe<StringFilterInput>;
   page_order?: InputMaybe<StringFilterInput>;
-  pages?: InputMaybe<StringFilterInput>;
   paper_texture?: InputMaybe<StringFilterInput>;
   paperback?: InputMaybe<StringFilterInput>;
   player_name?: InputMaybe<StringFilterInput>;
@@ -5456,9 +5450,7 @@ export type WebsiteInterfaceFiltersInput = {
   response_email_success?: InputMaybe<StringFilterInput>;
   response_invalid_code?: InputMaybe<StringFilterInput>;
   response_invalid_email?: InputMaybe<StringFilterInput>;
-  result?: InputMaybe<StringFilterInput>;
-  results?: InputMaybe<StringFilterInput>;
-  return_to?: InputMaybe<StringFilterInput>;
+  return_to_x?: InputMaybe<StringFilterInput>;
   review?: InputMaybe<StringFilterInput>;
   right_to_left?: InputMaybe<StringFilterInput>;
   scan?: InputMaybe<StringFilterInput>;
@@ -5477,6 +5469,7 @@ export type WebsiteInterfaceFiltersInput = {
   show_primary_items?: InputMaybe<StringFilterInput>;
   show_secondary_items?: InputMaybe<StringFilterInput>;
   show_subitems?: InputMaybe<StringFilterInput>;
+  showing_x_out_of_y_results?: InputMaybe<StringFilterInput>;
   side_pages?: InputMaybe<StringFilterInput>;
   single_page_view?: InputMaybe<StringFilterInput>;
   size?: InputMaybe<StringFilterInput>;
@@ -5489,8 +5482,7 @@ export type WebsiteInterfaceFiltersInput = {
   status_incomplete?: InputMaybe<StringFilterInput>;
   status_review?: InputMaybe<StringFilterInput>;
   subitem?: InputMaybe<StringFilterInput>;
-  subitem_of?: InputMaybe<StringFilterInput>;
-  subitems?: InputMaybe<StringFilterInput>;
+  subitem_of_x?: InputMaybe<StringFilterInput>;
   subscribers?: InputMaybe<StringFilterInput>;
   summary?: InputMaybe<StringFilterInput>;
   switch_to_folder_view?: InputMaybe<StringFilterInput>;
@@ -5510,8 +5502,7 @@ export type WebsiteInterfaceFiltersInput = {
   ui_language?: InputMaybe<LanguageFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   variant?: InputMaybe<StringFilterInput>;
-  variant_of?: InputMaybe<StringFilterInput>;
-  variants?: InputMaybe<StringFilterInput>;
+  variant_of_x?: InputMaybe<StringFilterInput>;
   video?: InputMaybe<StringFilterInput>;
   videos?: InputMaybe<StringFilterInput>;
   view_on?: InputMaybe<StringFilterInput>;
@@ -5522,6 +5513,7 @@ export type WebsiteInterfaceFiltersInput = {
   wiki?: InputMaybe<StringFilterInput>;
   wiki_description?: InputMaybe<StringFilterInput>;
   wiki_short_description?: InputMaybe<StringFilterInput>;
+  x_results?: InputMaybe<StringFilterInput>;
 };
 
 export type WebsiteInterfaceInput = {
@@ -5540,7 +5532,6 @@ export type WebsiteInterfaceInput = {
   binding?: InputMaybe<Scalars['String']>;
   book_fold?: InputMaybe<Scalars['String']>;
   calculated?: InputMaybe<Scalars['String']>;
-  categories?: InputMaybe<Scalars['String']>;
   category?: InputMaybe<Scalars['String']>;
   change_language?: InputMaybe<Scalars['String']>;
   channel?: InputMaybe<Scalars['String']>;
@@ -5561,8 +5552,9 @@ export type WebsiteInterfaceInput = {
   cover?: InputMaybe<Scalars['String']>;
   currency?: InputMaybe<Scalars['String']>;
   dark?: InputMaybe<Scalars['String']>;
+  dark_mode_extension_warning?: InputMaybe<Scalars['String']>;
   default_description?: InputMaybe<Scalars['String']>;
-  definition?: InputMaybe<Scalars['String']>;
+  definition_x?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   details?: InputMaybe<Scalars['String']>;
   display_all_items?: InputMaybe<Scalars['String']>;
@@ -5578,7 +5570,6 @@ export type WebsiteInterfaceInput = {
   font_size?: InputMaybe<Scalars['String']>;
   front_matter?: InputMaybe<Scalars['String']>;
   gallery?: InputMaybe<Scalars['String']>;
-  gallery_description?: InputMaybe<Scalars['String']>;
   game?: InputMaybe<Scalars['String']>;
   group?: InputMaybe<Scalars['String']>;
   group_by?: InputMaybe<Scalars['String']>;
@@ -5588,10 +5579,7 @@ export type WebsiteInterfaceInput = {
   incomplete?: InputMaybe<Scalars['String']>;
   item?: InputMaybe<Scalars['String']>;
   item_not_available?: InputMaybe<Scalars['String']>;
-  items?: InputMaybe<Scalars['String']>;
   language?: InputMaybe<Scalars['String']>;
-  language_switch_message?: InputMaybe<Scalars['String']>;
-  languages?: InputMaybe<Scalars['String']>;
   least_popular?: InputMaybe<Scalars['String']>;
   left_to_right?: InputMaybe<Scalars['String']>;
   legality?: InputMaybe<Scalars['String']>;
@@ -5603,9 +5591,6 @@ export type WebsiteInterfaceInput = {
   lighting?: InputMaybe<Scalars['String']>;
   listen_content?: InputMaybe<Scalars['String']>;
   longest?: InputMaybe<Scalars['String']>;
-  members?: InputMaybe<Scalars['String']>;
-  merch?: InputMaybe<Scalars['String']>;
-  merch_description?: InputMaybe<Scalars['String']>;
   message?: InputMaybe<Scalars['String']>;
   most_popular?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
@@ -5613,11 +5598,8 @@ export type WebsiteInterfaceInput = {
   news?: InputMaybe<Scalars['String']>;
   news_description?: InputMaybe<Scalars['String']>;
   night_reader?: InputMaybe<Scalars['String']>;
-  no_category?: InputMaybe<Scalars['String']>;
   no_results_message?: InputMaybe<Scalars['String']>;
   no_source_warning?: InputMaybe<Scalars['String']>;
-  no_type?: InputMaybe<Scalars['String']>;
-  no_year?: InputMaybe<Scalars['String']>;
   notes?: InputMaybe<Scalars['String']>;
   oldest?: InputMaybe<Scalars['String']>;
   only_display_items_i_have?: InputMaybe<Scalars['String']>;
@@ -5632,7 +5614,6 @@ export type WebsiteInterfaceInput = {
   page?: InputMaybe<Scalars['String']>;
   page_not_found?: InputMaybe<Scalars['String']>;
   page_order?: InputMaybe<Scalars['String']>;
-  pages?: InputMaybe<Scalars['String']>;
   paper_texture?: InputMaybe<Scalars['String']>;
   paperback?: InputMaybe<Scalars['String']>;
   player_name?: InputMaybe<Scalars['String']>;
@@ -5651,9 +5632,7 @@ export type WebsiteInterfaceInput = {
   response_email_success?: InputMaybe<Scalars['String']>;
   response_invalid_code?: InputMaybe<Scalars['String']>;
   response_invalid_email?: InputMaybe<Scalars['String']>;
-  result?: InputMaybe<Scalars['String']>;
-  results?: InputMaybe<Scalars['String']>;
-  return_to?: InputMaybe<Scalars['String']>;
+  return_to_x?: InputMaybe<Scalars['String']>;
   review?: InputMaybe<Scalars['String']>;
   right_to_left?: InputMaybe<Scalars['String']>;
   scan?: InputMaybe<Scalars['String']>;
@@ -5672,6 +5651,7 @@ export type WebsiteInterfaceInput = {
   show_primary_items?: InputMaybe<Scalars['String']>;
   show_secondary_items?: InputMaybe<Scalars['String']>;
   show_subitems?: InputMaybe<Scalars['String']>;
+  showing_x_out_of_y_results?: InputMaybe<Scalars['String']>;
   side_pages?: InputMaybe<Scalars['String']>;
   single_page_view?: InputMaybe<Scalars['String']>;
   size?: InputMaybe<Scalars['String']>;
@@ -5684,8 +5664,7 @@ export type WebsiteInterfaceInput = {
   status_incomplete?: InputMaybe<Scalars['String']>;
   status_review?: InputMaybe<Scalars['String']>;
   subitem?: InputMaybe<Scalars['String']>;
-  subitem_of?: InputMaybe<Scalars['String']>;
-  subitems?: InputMaybe<Scalars['String']>;
+  subitem_of_x?: InputMaybe<Scalars['String']>;
   subscribers?: InputMaybe<Scalars['String']>;
   summary?: InputMaybe<Scalars['String']>;
   switch_to_folder_view?: InputMaybe<Scalars['String']>;
@@ -5704,8 +5683,7 @@ export type WebsiteInterfaceInput = {
   typesetters?: InputMaybe<Scalars['String']>;
   ui_language?: InputMaybe<Scalars['ID']>;
   variant?: InputMaybe<Scalars['String']>;
-  variant_of?: InputMaybe<Scalars['String']>;
-  variants?: InputMaybe<Scalars['String']>;
+  variant_of_x?: InputMaybe<Scalars['String']>;
   video?: InputMaybe<Scalars['String']>;
   videos?: InputMaybe<Scalars['String']>;
   view_on?: InputMaybe<Scalars['String']>;
@@ -5716,6 +5694,7 @@ export type WebsiteInterfaceInput = {
   wiki?: InputMaybe<Scalars['String']>;
   wiki_description?: InputMaybe<Scalars['String']>;
   wiki_short_description?: InputMaybe<Scalars['String']>;
+  x_results?: InputMaybe<Scalars['String']>;
 };
 
 export type WikiPage = {
@@ -5877,6 +5856,8 @@ export type PostAttributesFragment = { __typename?: 'Post', slug: string, hidden
 
 export type VideoAttributesFragment = { __typename?: 'Video', uid: string, title: string, description: string, views: number, gone: boolean, duration: number, published_date: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null }, channel?: { __typename?: 'VideoChannelEntityResponse', data?: { __typename?: 'VideoChannelEntity', attributes?: { __typename?: 'VideoChannel', title: string, uid: string } | null } | null } | null };
 
+export type WeaponAttributesFragment = { __typename?: 'WeaponStory', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, type?: { __typename?: 'WeaponStoryTypeEntityResponse', data?: { __typename?: 'WeaponStoryTypeEntity', id?: string | null, attributes?: { __typename?: 'WeaponStoryType', slug: string, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryType', name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null } | null } | null, name?: Array<{ __typename?: 'ComponentTranslationsWeaponStory', id: string, name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, stories?: Array<{ __typename?: 'ComponentCollectionsComponentWeaponStory', id: string, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', short: string } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryStory', description?: string | null, level_1?: string | null, level_2?: string | null, level_3?: string | null, level_4?: string | null, status: Enum_Componenttranslationsweaponstorystory_Status, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null };
+
 export type WikiPageAttributesFragment = { __typename?: 'WikiPage', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', name: string, short: string } | null }> } | null, definitions?: Array<{ __typename?: 'ComponentWikiSpecializationGlossaryItem', translations?: Array<{ __typename?: 'ComponentTranslationsGlossaryDefinition', definition?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null, tags?: { __typename?: 'WikiPagesTagRelationResponseCollection', data: Array<{ __typename?: 'WikiPagesTagEntity', id?: string | null, attributes?: { __typename?: 'WikiPagesTag', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWiki', title: string, summary?: string | null, aliases?: Array<{ __typename?: 'ComponentCollectionsComponentAliases', alias: string } | null> | null, body?: { __typename?: 'ComponentCollectionsComponentBody', body: string } | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null };
 
 export type GetContentQueryVariables = Exact<{
@@ -5926,6 +5907,18 @@ export type GetVideosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetVideosQuery = { __typename?: 'Query', videos?: { __typename?: 'VideoEntityResponseCollection', data: Array<{ __typename?: 'VideoEntity', id?: string | null, attributes?: { __typename?: 'Video', uid: string, title: string, description: string, views: number, gone: boolean, duration: number, published_date: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null }, channel?: { __typename?: 'VideoChannelEntityResponse', data?: { __typename?: 'VideoChannelEntity', attributes?: { __typename?: 'VideoChannel', title: string, uid: string } | null } | null } | null } | null }> } | null };
+
+export type GetWeaponQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']>;
+}>;
+
+
+export type GetWeaponQuery = { __typename?: 'Query', weaponStory?: { __typename?: 'WeaponStoryEntityResponse', data?: { __typename?: 'WeaponStoryEntity', id?: string | null, attributes?: { __typename?: 'WeaponStory', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, type?: { __typename?: 'WeaponStoryTypeEntityResponse', data?: { __typename?: 'WeaponStoryTypeEntity', id?: string | null, attributes?: { __typename?: 'WeaponStoryType', slug: string, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryType', name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null } | null } | null, name?: Array<{ __typename?: 'ComponentTranslationsWeaponStory', id: string, name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, stories?: Array<{ __typename?: 'ComponentCollectionsComponentWeaponStory', id: string, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', short: string } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryStory', description?: string | null, level_1?: string | null, level_2?: string | null, level_3?: string | null, level_4?: string | null, status: Enum_Componenttranslationsweaponstorystory_Status, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null } | null } | null } | null };
+
+export type GetWeaponsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetWeaponsQuery = { __typename?: 'Query', weaponStories?: { __typename?: 'WeaponStoryEntityResponseCollection', data: Array<{ __typename?: 'WeaponStoryEntity', id?: string | null, attributes?: { __typename?: 'WeaponStory', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, type?: { __typename?: 'WeaponStoryTypeEntityResponse', data?: { __typename?: 'WeaponStoryTypeEntity', id?: string | null, attributes?: { __typename?: 'WeaponStoryType', slug: string, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryType', name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null } | null } | null, name?: Array<{ __typename?: 'ComponentTranslationsWeaponStory', id: string, name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, stories?: Array<{ __typename?: 'ComponentCollectionsComponentWeaponStory', id: string, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', short: string } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryStory', description?: string | null, level_1?: string | null, level_2?: string | null, level_3?: string | null, level_4?: string | null, status: Enum_Componenttranslationsweaponstorystory_Status, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null } | null }> } | null };
 
 export type GetWikiPageQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
@@ -6205,6 +6198,73 @@ export const VideoAttributesFragmentDoc = gql`
   duration
 }
     `;
+export const WeaponAttributesFragmentDoc = gql`
+    fragment weaponAttributes on WeaponStory {
+  thumbnail {
+    data {
+      attributes {
+        ...uploadImage
+      }
+    }
+  }
+  type {
+    data {
+      id
+      attributes {
+        slug
+        translations(filters: {language: {code: {eq: "en"}}}) {
+          name
+          language {
+            data {
+              attributes {
+                code
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  name(pagination: {limit: -1}) {
+    id
+    name
+    language {
+      data {
+        attributes {
+          code
+        }
+      }
+    }
+  }
+  slug
+  stories(pagination: {limit: -1}) {
+    id
+    categories(pagination: {limit: -1}) {
+      data {
+        id
+        attributes {
+          short
+        }
+      }
+    }
+    translations(pagination: {limit: -1}) {
+      description
+      level_1
+      level_2
+      level_3
+      level_4
+      status
+      language {
+        data {
+          attributes {
+            code
+          }
+        }
+      }
+    }
+  }
+}
+    ${UploadImageFragmentDoc}`;
 export const WikiPageAttributesFragmentDoc = gql`
     fragment wikiPageAttributes on WikiPage {
   slug
@@ -6369,6 +6429,30 @@ export const GetVideosDocument = gql`
   }
 }
     ${VideoAttributesFragmentDoc}`;
+export const GetWeaponDocument = gql`
+    query getWeapon($id: ID) {
+  weaponStory(id: $id) {
+    data {
+      id
+      attributes {
+        ...weaponAttributes
+      }
+    }
+  }
+}
+    ${WeaponAttributesFragmentDoc}`;
+export const GetWeaponsDocument = gql`
+    query getWeapons {
+  weaponStories(pagination: {limit: -1}) {
+    data {
+      id
+      attributes {
+        ...weaponAttributes
+      }
+    }
+  }
+}
+    ${WeaponAttributesFragmentDoc}`;
 export const GetWikiPageDocument = gql`
     query getWikiPage($id: ID) {
   wikiPage(id: $id) {
@@ -6424,6 +6508,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getVideos(variables?: GetVideosQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetVideosQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetVideosQuery>(GetVideosDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getVideos', 'query');
+    },
+    getWeapon(variables?: GetWeaponQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetWeaponQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetWeaponQuery>(GetWeaponDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getWeapon', 'query');
+    },
+    getWeapons(variables?: GetWeaponsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetWeaponsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetWeaponsQuery>(GetWeaponsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getWeapons', 'query');
     },
     getWikiPage(variables?: GetWikiPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetWikiPageQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetWikiPageQuery>(GetWikiPageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getWikiPage', 'query');

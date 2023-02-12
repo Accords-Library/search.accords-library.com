@@ -1,0 +1,10 @@
+query getWeapon($id: ID) {
+  weaponStory(id: $id) {
+    data {
+      id
+      attributes {
+        ...weaponAttributes
+      }
+    }
+  }
+}

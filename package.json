@@ -2,19 +2,26 @@
   "name": "search.accords-library.com",
   "private": true,
   "scripts": {
-    "generate": "graphql-codegen --config graphql-codegen.config.js"
+    "generate": "graphql-codegen --config graphql-codegen.config.js",
+    "eslint": "eslint .",
+    "tsc": "tsc",
+    "precommit": "npm run generate && npm run eslint && npm run tsc && echo ALL PRECOMMIT CHECKS PASSED SUCCESSFULLY, LET\\'S FUCKING GO!",
+    "start": "esrun --tsconfig=./tsconfig.json src/app.ts"
   },
   "dependencies": {
-    "@digitak/esrun": "^3.2.15",
+    "@digitak/esrun": "^3.2.19",
     "dotenv": "^16.0.3",
-    "meilisearch": "^0.30.0"
+    "meilisearch": "^0.31.1"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.16.1",
-    "@graphql-codegen/typescript": "2.8.5",
+    "@graphql-codegen/cli": "^3.0.0",
+    "@graphql-codegen/typescript": "3.0.0",
     "@graphql-codegen/typescript-graphql-request": "^4.5.8",
-    "@graphql-codegen/typescript-operations": "^2.5.10",
-    "@types/node": "^18.11.17",
+    "@graphql-codegen/typescript-operations": "^3.0.0",
+    "@types/node": "^18.13.0",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.34.0",
     "graphql": "^16.6.0",
     "graphql-request": "^5.1.0"
   }
