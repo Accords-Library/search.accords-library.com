@@ -4,6 +4,10 @@ import { getMeili, strapiToMeiliTransformFunctions } from "helpers/meili";
 
 export const synchronizeStrapiAndMeili = async (): Promise<void> => {
   const sdk = getReadySdk();
+  const meili = getMeili();
+  const indexes = await meili.getIndexes();
+  await Promise.all(indexes.results.map(async (index) => index.delete()));
+  
 
   // [ LIBRARY ITEMS ]
 
@@ -88,7 +92,6 @@ const processIndex = async <I extends MeiliDocumentsType["index"]>(
   filterableAttributes?: (keyof NonNullable<typeof data>[number])[]
 ) => {
   const meili = getMeili();
-  await meili.deleteIndexIfExists(indexName);
 
   if (data && data.length > 0) {
     await meili.createIndex(indexName);
