@@ -1543,6 +1543,54 @@ export type ComponentTranslationsPostsInput = {
   translators?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
+export type ComponentTranslationsReinCostumes = {
+  __typename?: 'ComponentTranslationsReinCostumes';
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  language?: Maybe<LanguageEntityResponse>;
+  name: Scalars['String'];
+};
+
+export type ComponentTranslationsReinCostumesFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentTranslationsReinCostumesFiltersInput>>>;
+  description?: InputMaybe<StringFilterInput>;
+  language?: InputMaybe<LanguageFiltersInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ComponentTranslationsReinCostumesFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentTranslationsReinCostumesFiltersInput>>>;
+};
+
+export type ComponentTranslationsReinCostumesInput = {
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  language?: InputMaybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+export type ComponentTranslationsReinEmblems = {
+  __typename?: 'ComponentTranslationsReinEmblems';
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  language?: Maybe<LanguageEntityResponse>;
+  name: Scalars['String'];
+};
+
+export type ComponentTranslationsReinEmblemsFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentTranslationsReinEmblemsFiltersInput>>>;
+  description?: InputMaybe<StringFilterInput>;
+  language?: InputMaybe<LanguageFiltersInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ComponentTranslationsReinEmblemsFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentTranslationsReinEmblemsFiltersInput>>>;
+};
+
+export type ComponentTranslationsReinEmblemsInput = {
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  language?: InputMaybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
 export type ComponentTranslationsScanSet = {
   __typename?: 'ComponentTranslationsScanSet';
   credits: ComponentBasicsCredits;
@@ -2416,7 +2464,7 @@ export type GamePlatformRelationResponseCollection = {
   data: Array<GamePlatformEntity>;
 };
 
-export type GenericMorph = AudioSubtype | Category | Chronicle | ChroniclesChapter | ChronologyEra | ChronologyItem | ComponentBasicsCredits | ComponentBasicsDatepicker | ComponentBasicsFileSize | ComponentBasicsPrice | ComponentBasicsSize | ComponentBasicsUrl | ComponentCollectionsComponentAliases | ComponentCollectionsComponentBody | ComponentCollectionsComponentDefinition | ComponentCollectionsComponentEvent | ComponentCollectionsComponentGlossaryDefinition | ComponentCollectionsComponentLibraryCover | ComponentCollectionsComponentLibraryDustJacket | ComponentCollectionsComponentLibraryImages | ComponentCollectionsComponentLibraryObiBelt | ComponentCollectionsComponentTitles | ComponentCollectionsComponentWeaponStory | ComponentCollectionsComponentWikiDefinition | ComponentMetadataAudio | ComponentMetadataBooks | ComponentMetadataGame | ComponentMetadataGroup | ComponentMetadataMerch | ComponentMetadataOther | ComponentMetadataVideo | ComponentPageBuilderGallery | ComponentPageBuilderGrid | ComponentPageBuilderTabs | ComponentRangeGameAspect | ComponentRangeOther | ComponentRangePageRange | ComponentRangeTimeRange | ComponentSetsAudioSet | ComponentSetsScanSet | ComponentSetsTextSet | ComponentSetsVideoSet | ComponentSetsWikiSet | ComponentSourceUrlSource | ComponentTranslationsAudioSets | ComponentTranslationsBio | ComponentTranslationsChronicles | ComponentTranslationsChronologyEra | ComponentTranslationsChronologyItem | ComponentTranslationsGlossaryDefinition | ComponentTranslationsGlossaryItem | ComponentTranslationsLibraryContent | ComponentTranslationsLibraryItems | ComponentTranslationsPosts | ComponentTranslationsScanSet | ComponentTranslationsSimpleTitle | ComponentTranslationsTextSet | ComponentTranslationsTitle | ComponentTranslationsVideoSets | ComponentTranslationsWeaponStory | ComponentTranslationsWeaponStoryStory | ComponentTranslationsWeaponStoryType | ComponentTranslationsWebArchives | ComponentTranslationsWiki | ComponentTranslationsWikiPost | ComponentWikiSpecializationChronology | ComponentWikiSpecializationGlossaryItem | ComponentWikiSpecializationPost | ComponentWikiSpecializationWeapon | Content | ContentType | ContentsFolder | Currency | GamePlatform | GlossaryItem | GlossaryItemType | GroupSubtype | Language | LibraryItem | MerchItem | MetadataType | Post | RangedContent | Recorder | Source | TextualSubtype | UploadFile | UploadFolder | Video | VideoChannel | VideoSubtype | WeaponStory | WeaponStoryGroup | WeaponStoryType | WebArchive | WebsiteInterface | WikiPage | WikiPagesTag;
+export type GenericMorph = AudioSubtype | Category | Chronicle | ChroniclesChapter | ChronologyEra | ChronologyItem | ComponentBasicsCredits | ComponentBasicsDatepicker | ComponentBasicsFileSize | ComponentBasicsPrice | ComponentBasicsSize | ComponentBasicsUrl | ComponentCollectionsComponentAliases | ComponentCollectionsComponentBody | ComponentCollectionsComponentDefinition | ComponentCollectionsComponentEvent | ComponentCollectionsComponentGlossaryDefinition | ComponentCollectionsComponentLibraryCover | ComponentCollectionsComponentLibraryDustJacket | ComponentCollectionsComponentLibraryImages | ComponentCollectionsComponentLibraryObiBelt | ComponentCollectionsComponentTitles | ComponentCollectionsComponentWeaponStory | ComponentCollectionsComponentWikiDefinition | ComponentMetadataAudio | ComponentMetadataBooks | ComponentMetadataGame | ComponentMetadataGroup | ComponentMetadataMerch | ComponentMetadataOther | ComponentMetadataVideo | ComponentPageBuilderGallery | ComponentPageBuilderGrid | ComponentPageBuilderTabs | ComponentRangeGameAspect | ComponentRangeOther | ComponentRangePageRange | ComponentRangeTimeRange | ComponentSetsAudioSet | ComponentSetsScanSet | ComponentSetsTextSet | ComponentSetsVideoSet | ComponentSetsWikiSet | ComponentSourceUrlSource | ComponentTranslationsAudioSets | ComponentTranslationsBio | ComponentTranslationsChronicles | ComponentTranslationsChronologyEra | ComponentTranslationsChronologyItem | ComponentTranslationsGlossaryDefinition | ComponentTranslationsGlossaryItem | ComponentTranslationsLibraryContent | ComponentTranslationsLibraryItems | ComponentTranslationsPosts | ComponentTranslationsReinCostumes | ComponentTranslationsReinEmblems | ComponentTranslationsScanSet | ComponentTranslationsSimpleTitle | ComponentTranslationsTextSet | ComponentTranslationsTitle | ComponentTranslationsVideoSets | ComponentTranslationsWeaponStory | ComponentTranslationsWeaponStoryStory | ComponentTranslationsWeaponStoryType | ComponentTranslationsWebArchives | ComponentTranslationsWiki | ComponentTranslationsWikiPost | ComponentWikiSpecializationChronology | ComponentWikiSpecializationGlossaryItem | ComponentWikiSpecializationPost | ComponentWikiSpecializationWeapon | Content | ContentType | ContentsFolder | Currency | GamePlatform | GlossaryItem | GlossaryItemType | GroupSubtype | Language | LibraryItem | MerchItem | MetadataType | Post | RangedContent | Recorder | ReinCostume | ReinEmblem | Source | TextualSubtype | UploadFile | UploadFolder | Video | VideoChannel | VideoSubtype | WeaponStory | WeaponStoryGroup | WeaponStoryType | WebArchive | WebsiteInterface | WikiPage | WikiPagesTag;
 
 export type GlossaryItem = {
   __typename?: 'GlossaryItem';
@@ -2980,6 +3028,8 @@ export type Mutation = {
   createPost?: Maybe<PostEntityResponse>;
   createRangedContent?: Maybe<RangedContentEntityResponse>;
   createRecorder?: Maybe<RecorderEntityResponse>;
+  createReinCostume?: Maybe<ReinCostumeEntityResponse>;
+  createReinEmblem?: Maybe<ReinEmblemEntityResponse>;
   createSource?: Maybe<SourceEntityResponse>;
   createTextualSubtype?: Maybe<TextualSubtypeEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -3015,6 +3065,8 @@ export type Mutation = {
   deletePost?: Maybe<PostEntityResponse>;
   deleteRangedContent?: Maybe<RangedContentEntityResponse>;
   deleteRecorder?: Maybe<RecorderEntityResponse>;
+  deleteReinCostume?: Maybe<ReinCostumeEntityResponse>;
+  deleteReinEmblem?: Maybe<ReinEmblemEntityResponse>;
   deleteSource?: Maybe<SourceEntityResponse>;
   deleteTextualSubtype?: Maybe<TextualSubtypeEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -3053,6 +3105,8 @@ export type Mutation = {
   updatePost?: Maybe<PostEntityResponse>;
   updateRangedContent?: Maybe<RangedContentEntityResponse>;
   updateRecorder?: Maybe<RecorderEntityResponse>;
+  updateReinCostume?: Maybe<ReinCostumeEntityResponse>;
+  updateReinEmblem?: Maybe<ReinEmblemEntityResponse>;
   updateSource?: Maybe<SourceEntityResponse>;
   updateTextualSubtype?: Maybe<TextualSubtypeEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -3173,6 +3227,16 @@ export type MutationCreateRangedContentArgs = {
 
 export type MutationCreateRecorderArgs = {
   data: RecorderInput;
+};
+
+
+export type MutationCreateReinCostumeArgs = {
+  data: ReinCostumeInput;
+};
+
+
+export type MutationCreateReinEmblemArgs = {
+  data: ReinEmblemInput;
 };
 
 
@@ -3347,6 +3411,16 @@ export type MutationDeleteRangedContentArgs = {
 
 
 export type MutationDeleteRecorderArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteReinCostumeArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteReinEmblemArgs = {
   id: Scalars['ID'];
 };
 
@@ -3562,6 +3636,18 @@ export type MutationUpdateRangedContentArgs = {
 
 export type MutationUpdateRecorderArgs = {
   data: RecorderInput;
+  id: Scalars['ID'];
+};
+
+
+export type MutationUpdateReinCostumeArgs = {
+  data: ReinCostumeInput;
+  id: Scalars['ID'];
+};
+
+
+export type MutationUpdateReinEmblemArgs = {
+  data: ReinEmblemInput;
   id: Scalars['ID'];
 };
 
@@ -3793,6 +3879,10 @@ export type Query = {
   rangedContents?: Maybe<RangedContentEntityResponseCollection>;
   recorder?: Maybe<RecorderEntityResponse>;
   recorders?: Maybe<RecorderEntityResponseCollection>;
+  reinCostume?: Maybe<ReinCostumeEntityResponse>;
+  reinCostumes?: Maybe<ReinCostumeEntityResponseCollection>;
+  reinEmblem?: Maybe<ReinEmblemEntityResponse>;
+  reinEmblems?: Maybe<ReinEmblemEntityResponseCollection>;
   source?: Maybe<SourceEntityResponse>;
   sources?: Maybe<SourceEntityResponseCollection>;
   textualSubtype?: Maybe<TextualSubtypeEntityResponse>;
@@ -4071,6 +4161,30 @@ export type QueryRecorderArgs = {
 
 export type QueryRecordersArgs = {
   filters?: InputMaybe<RecorderFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryReinCostumeArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryReinCostumesArgs = {
+  filters?: InputMaybe<ReinCostumeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryReinEmblemArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryReinEmblemsArgs = {
+  filters?: InputMaybe<ReinEmblemFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -4378,6 +4492,124 @@ export type RecorderInput = {
 export type RecorderRelationResponseCollection = {
   __typename?: 'RecorderRelationResponseCollection';
   data: Array<RecorderEntity>;
+};
+
+export type ReinCostume = {
+  __typename?: 'ReinCostume';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  emblem?: Maybe<ReinEmblemEntityResponse>;
+  slug: Scalars['String'];
+  sprite?: Maybe<UploadFileEntityResponse>;
+  thumbnail?: Maybe<UploadFileEntityResponse>;
+  translations?: Maybe<Array<Maybe<ComponentTranslationsReinCostumes>>>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type ReinCostumeTranslationsArgs = {
+  filters?: InputMaybe<ComponentTranslationsReinCostumesFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type ReinCostumeEntity = {
+  __typename?: 'ReinCostumeEntity';
+  attributes?: Maybe<ReinCostume>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type ReinCostumeEntityResponse = {
+  __typename?: 'ReinCostumeEntityResponse';
+  data?: Maybe<ReinCostumeEntity>;
+};
+
+export type ReinCostumeEntityResponseCollection = {
+  __typename?: 'ReinCostumeEntityResponseCollection';
+  data: Array<ReinCostumeEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type ReinCostumeFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ReinCostumeFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  emblem?: InputMaybe<ReinEmblemFiltersInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<ReinCostumeFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ReinCostumeFiltersInput>>>;
+  slug?: InputMaybe<StringFilterInput>;
+  translations?: InputMaybe<ComponentTranslationsReinCostumesFiltersInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ReinCostumeInput = {
+  emblem?: InputMaybe<Scalars['ID']>;
+  slug?: InputMaybe<Scalars['String']>;
+  sprite?: InputMaybe<Scalars['ID']>;
+  thumbnail?: InputMaybe<Scalars['ID']>;
+  translations?: InputMaybe<Array<InputMaybe<ComponentTranslationsReinCostumesInput>>>;
+};
+
+export type ReinCostumeRelationResponseCollection = {
+  __typename?: 'ReinCostumeRelationResponseCollection';
+  data: Array<ReinCostumeEntity>;
+};
+
+export type ReinEmblem = {
+  __typename?: 'ReinEmblem';
+  costumes?: Maybe<ReinCostumeRelationResponseCollection>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  slug: Scalars['String'];
+  translations?: Maybe<Array<Maybe<ComponentTranslationsReinEmblems>>>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type ReinEmblemCostumesArgs = {
+  filters?: InputMaybe<ReinCostumeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type ReinEmblemTranslationsArgs = {
+  filters?: InputMaybe<ComponentTranslationsReinEmblemsFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type ReinEmblemEntity = {
+  __typename?: 'ReinEmblemEntity';
+  attributes?: Maybe<ReinEmblem>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type ReinEmblemEntityResponse = {
+  __typename?: 'ReinEmblemEntityResponse';
+  data?: Maybe<ReinEmblemEntity>;
+};
+
+export type ReinEmblemEntityResponseCollection = {
+  __typename?: 'ReinEmblemEntityResponseCollection';
+  data: Array<ReinEmblemEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type ReinEmblemFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ReinEmblemFiltersInput>>>;
+  costumes?: InputMaybe<ReinCostumeFiltersInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<ReinEmblemFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ReinEmblemFiltersInput>>>;
+  slug?: InputMaybe<StringFilterInput>;
+  translations?: InputMaybe<ComponentTranslationsReinEmblemsFiltersInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ReinEmblemInput = {
+  costumes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  slug?: InputMaybe<Scalars['String']>;
+  translations?: InputMaybe<Array<InputMaybe<ComponentTranslationsReinEmblemsInput>>>;
 };
 
 export type ResponseCollectionMeta = {
@@ -5197,6 +5429,7 @@ export type WebsiteInterface = {
   least_popular?: Maybe<Scalars['String']>;
   left_to_right?: Maybe<Scalars['String']>;
   legality?: Maybe<Scalars['String']>;
+  level_x?: Maybe<Scalars['String']>;
   library?: Maybe<Scalars['String']>;
   library_description?: Maybe<Scalars['String']>;
   library_short_description?: Maybe<Scalars['String']>;
@@ -5277,6 +5510,7 @@ export type WebsiteInterface = {
   status_draft?: Maybe<Scalars['String']>;
   status_incomplete?: Maybe<Scalars['String']>;
   status_review?: Maybe<Scalars['String']>;
+  story_x?: Maybe<Scalars['String']>;
   subitem?: Maybe<Scalars['String']>;
   subitem_of_x?: Maybe<Scalars['String']>;
   subscribers?: Maybe<Scalars['String']>;
@@ -5305,6 +5539,8 @@ export type WebsiteInterface = {
   view_scans?: Maybe<Scalars['String']>;
   want_it?: Maybe<Scalars['String']>;
   watch_content?: Maybe<Scalars['String']>;
+  weapon?: Maybe<Scalars['String']>;
+  weapons_description?: Maybe<Scalars['String']>;
   width?: Maybe<Scalars['String']>;
   wiki?: Maybe<Scalars['String']>;
   wiki_description?: Maybe<Scalars['String']>;
@@ -5399,6 +5635,7 @@ export type WebsiteInterfaceFiltersInput = {
   least_popular?: InputMaybe<StringFilterInput>;
   left_to_right?: InputMaybe<StringFilterInput>;
   legality?: InputMaybe<StringFilterInput>;
+  level_x?: InputMaybe<StringFilterInput>;
   library?: InputMaybe<StringFilterInput>;
   library_description?: InputMaybe<StringFilterInput>;
   library_short_description?: InputMaybe<StringFilterInput>;
@@ -5481,6 +5718,7 @@ export type WebsiteInterfaceFiltersInput = {
   status_draft?: InputMaybe<StringFilterInput>;
   status_incomplete?: InputMaybe<StringFilterInput>;
   status_review?: InputMaybe<StringFilterInput>;
+  story_x?: InputMaybe<StringFilterInput>;
   subitem?: InputMaybe<StringFilterInput>;
   subitem_of_x?: InputMaybe<StringFilterInput>;
   subscribers?: InputMaybe<StringFilterInput>;
@@ -5509,6 +5747,8 @@ export type WebsiteInterfaceFiltersInput = {
   view_scans?: InputMaybe<StringFilterInput>;
   want_it?: InputMaybe<StringFilterInput>;
   watch_content?: InputMaybe<StringFilterInput>;
+  weapon?: InputMaybe<StringFilterInput>;
+  weapons_description?: InputMaybe<StringFilterInput>;
   width?: InputMaybe<StringFilterInput>;
   wiki?: InputMaybe<StringFilterInput>;
   wiki_description?: InputMaybe<StringFilterInput>;
@@ -5583,6 +5823,7 @@ export type WebsiteInterfaceInput = {
   least_popular?: InputMaybe<Scalars['String']>;
   left_to_right?: InputMaybe<Scalars['String']>;
   legality?: InputMaybe<Scalars['String']>;
+  level_x?: InputMaybe<Scalars['String']>;
   library?: InputMaybe<Scalars['String']>;
   library_description?: InputMaybe<Scalars['String']>;
   library_short_description?: InputMaybe<Scalars['String']>;
@@ -5663,6 +5904,7 @@ export type WebsiteInterfaceInput = {
   status_draft?: InputMaybe<Scalars['String']>;
   status_incomplete?: InputMaybe<Scalars['String']>;
   status_review?: InputMaybe<Scalars['String']>;
+  story_x?: InputMaybe<Scalars['String']>;
   subitem?: InputMaybe<Scalars['String']>;
   subitem_of_x?: InputMaybe<Scalars['String']>;
   subscribers?: InputMaybe<Scalars['String']>;
@@ -5690,6 +5932,8 @@ export type WebsiteInterfaceInput = {
   view_scans?: InputMaybe<Scalars['String']>;
   want_it?: InputMaybe<Scalars['String']>;
   watch_content?: InputMaybe<Scalars['String']>;
+  weapon?: InputMaybe<Scalars['String']>;
+  weapons_description?: InputMaybe<Scalars['String']>;
   width?: InputMaybe<Scalars['String']>;
   wiki?: InputMaybe<Scalars['String']>;
   wiki_description?: InputMaybe<Scalars['String']>;

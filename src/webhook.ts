@@ -100,7 +100,7 @@ export const webhookHandler = async (
 
 const processIndex = async <I extends MeiliDocumentsType["index"]>(
   indexName: I,
-  data: Extract<MeiliDocumentsType, { index: I }>["documents"] | null | undefined
+  data: Extract<MeiliDocumentsType, { index: I }>["documents"]
 ) => {
   const meili = getMeili();
   const index = meili.index(indexName);

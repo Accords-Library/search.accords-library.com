@@ -9,20 +9,20 @@
     "start": "esrun --tsconfig=./tsconfig.json src/app.ts"
   },
   "dependencies": {
-    "@digitak/esrun": "^3.2.19",
+    "@digitak/esrun": "3.2.20",
     "dotenv": "^16.0.3",
     "meilisearch": "^0.31.1"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^3.0.0",
-    "@graphql-codegen/typescript": "3.0.0",
+    "@graphql-codegen/cli": "^3.2.1",
+    "@graphql-codegen/typescript": "3.0.1",
     "@graphql-codegen/typescript-graphql-request": "^4.5.8",
-    "@graphql-codegen/typescript-operations": "^3.0.0",
-    "@types/node": "^18.13.0",
-    "@typescript-eslint/eslint-plugin": "^5.51.0",
-    "@typescript-eslint/parser": "^5.51.0",
-    "eslint": "^8.34.0",
+    "@graphql-codegen/typescript-operations": "^3.0.1",
+    "@types/node": "^18.14.6",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "^8.35.0",
     "graphql": "^16.6.0",
-    "graphql-request": "^5.1.0"
+    "graphql-request": "5.1.0"
   }
 }
