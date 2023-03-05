@@ -7,7 +7,6 @@ export const synchronizeStrapiAndMeili = async (): Promise<void> => {
   const meili = getMeili();
   const indexes = await meili.getIndexes();
   await Promise.all(indexes.results.map(async (index) => index.delete()));
-  
 
   // [ LIBRARY ITEMS ]
 
@@ -19,7 +18,7 @@ export const synchronizeStrapiAndMeili = async (): Promise<void> => {
     ),
     ["title", "subtitle", "descriptions"],
     ["sortable_name", "sortable_date", "sortable_price"],
-    ["primary", "root_item", "id", "untangible_group_item"]
+    ["primary", "root_item", "id", "untangible_group_item", "filterable_categories"]
   );
 
   // [ CONTENT ]
@@ -94,7 +93,7 @@ const processIndex = async <I extends MeiliDocumentsType["index"]>(
   const meili = getMeili();
 
   if (data && data.length > 0) {
-    await meili.createIndex(indexName);
+    await meili.createIndex(indexName, { primaryKey: "id" });
     const index = meili.index(indexName);
     index.updateSettings({
       searchableAttributes: searchableAttributes as string[],

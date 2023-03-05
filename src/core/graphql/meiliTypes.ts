@@ -18,6 +18,7 @@ export interface MeiliLibraryItem extends LibraryItemAttributesFragment {
   sortable_name: string;
   sortable_price: number | undefined;
   sortable_date: number | undefined;
+  filterable_categories: string[];
   untangible_group_item: boolean;
 }
 

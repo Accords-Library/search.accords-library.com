@@ -75,6 +75,9 @@ const transformLibraryItem: TransformFunction<MeiliIndices.LIBRARY_ITEM> = (data
       attributes.price?.currency?.data?.attributes && isDefined(attributes.price.amount)
         ? attributes.price.amount * attributes.price.currency.data.attributes.rate_to_usd
         : undefined,
+    filterable_categories: filterHasAttributes(attributes.categories?.data, [
+      "attributes.short",
+    ] as const).map((category) => category.attributes.short),
     untangible_group_item: isUntangibleGroupItem(attributes.metadata?.[0]),
     ...attributes,
   };
