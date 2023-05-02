@@ -1942,6 +1942,8 @@ export type Content = {
   chronicles?: Maybe<ChronicleRelationResponseCollection>;
   createdAt?: Maybe<Scalars['DateTime']>;
   folder?: Maybe<ContentsFolderEntityResponse>;
+  next_contents?: Maybe<ContentRelationResponseCollection>;
+  previous_contents?: Maybe<ContentRelationResponseCollection>;
   ranged_contents?: Maybe<RangedContentRelationResponseCollection>;
   slug: Scalars['String'];
   thumbnail?: Maybe<UploadFileEntityResponse>;
@@ -1960,6 +1962,20 @@ export type ContentCategoriesArgs = {
 
 export type ContentChroniclesArgs = {
   filters?: InputMaybe<ChronicleFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type ContentNext_ContentsArgs = {
+  filters?: InputMaybe<ContentFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type ContentPrevious_ContentsArgs = {
+  filters?: InputMaybe<ContentFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -2002,8 +2018,10 @@ export type ContentFiltersInput = {
   createdAt?: InputMaybe<DateTimeFilterInput>;
   folder?: InputMaybe<ContentsFolderFiltersInput>;
   id?: InputMaybe<IdFilterInput>;
+  next_contents?: InputMaybe<ContentFiltersInput>;
   not?: InputMaybe<ContentFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ContentFiltersInput>>>;
+  previous_contents?: InputMaybe<ContentFiltersInput>;
   ranged_contents?: InputMaybe<RangedContentFiltersInput>;
   slug?: InputMaybe<StringFilterInput>;
   translations?: InputMaybe<ComponentTranslationsTitleFiltersInput>;
@@ -2015,6 +2033,8 @@ export type ContentInput = {
   categories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   chronicles?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   folder?: InputMaybe<Scalars['ID']>;
+  next_contents?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  previous_contents?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   ranged_contents?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   slug?: InputMaybe<Scalars['String']>;
   thumbnail?: InputMaybe<Scalars['ID']>;
@@ -2080,7 +2100,6 @@ export type ContentsFolder = {
   contents?: Maybe<ContentRelationResponseCollection>;
   createdAt?: Maybe<Scalars['DateTime']>;
   parent_folder?: Maybe<ContentsFolderEntityResponse>;
-  sequence: Scalars['Boolean'];
   slug: Scalars['String'];
   subfolders?: Maybe<ContentsFolderRelationResponseCollection>;
   titles: Array<Maybe<ComponentTranslationsSimpleTitle>>;
@@ -2133,7 +2152,6 @@ export type ContentsFolderFiltersInput = {
   not?: InputMaybe<ContentsFolderFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ContentsFolderFiltersInput>>>;
   parent_folder?: InputMaybe<ContentsFolderFiltersInput>;
-  sequence?: InputMaybe<BooleanFilterInput>;
   slug?: InputMaybe<StringFilterInput>;
   subfolders?: InputMaybe<ContentsFolderFiltersInput>;
   titles?: InputMaybe<ComponentTranslationsSimpleTitleFiltersInput>;
@@ -2143,7 +2161,6 @@ export type ContentsFolderFiltersInput = {
 export type ContentsFolderInput = {
   contents?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   parent_folder?: InputMaybe<Scalars['ID']>;
-  sequence?: InputMaybe<Scalars['Boolean']>;
   slug?: InputMaybe<Scalars['String']>;
   subfolders?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   titles?: InputMaybe<Array<InputMaybe<ComponentTranslationsSimpleTitleInput>>>;
@@ -5464,6 +5481,7 @@ export type WebsiteInterface = {
   paper_texture?: Maybe<Scalars['String']>;
   paperback?: Maybe<Scalars['String']>;
   player_name?: Maybe<Scalars['String']>;
+  player_name_tooltip?: Maybe<Scalars['String']>;
   previous_content?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['String']>;
   primary_language?: Maybe<Scalars['String']>;
@@ -5672,6 +5690,7 @@ export type WebsiteInterfaceFiltersInput = {
   paper_texture?: InputMaybe<StringFilterInput>;
   paperback?: InputMaybe<StringFilterInput>;
   player_name?: InputMaybe<StringFilterInput>;
+  player_name_tooltip?: InputMaybe<StringFilterInput>;
   previous_content?: InputMaybe<StringFilterInput>;
   price?: InputMaybe<StringFilterInput>;
   primary_language?: InputMaybe<StringFilterInput>;
@@ -5858,6 +5877,7 @@ export type WebsiteInterfaceInput = {
   paper_texture?: InputMaybe<Scalars['String']>;
   paperback?: InputMaybe<Scalars['String']>;
   player_name?: InputMaybe<Scalars['String']>;
+  player_name_tooltip?: InputMaybe<Scalars['String']>;
   previous_content?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['String']>;
   primary_language?: InputMaybe<Scalars['String']>;
