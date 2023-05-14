@@ -1417,8 +1417,32 @@ export type ComponentTranslationsGlossaryDefinition = {
   definition?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   language?: Maybe<LanguageEntityResponse>;
+  proofreaders?: Maybe<RecorderRelationResponseCollection>;
   source_language?: Maybe<LanguageEntityResponse>;
   status: Enum_Componenttranslationsglossarydefinition_Status;
+  transcribers?: Maybe<RecorderRelationResponseCollection>;
+  translators?: Maybe<RecorderRelationResponseCollection>;
+};
+
+
+export type ComponentTranslationsGlossaryDefinitionProofreadersArgs = {
+  filters?: InputMaybe<RecorderFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type ComponentTranslationsGlossaryDefinitionTranscribersArgs = {
+  filters?: InputMaybe<RecorderFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type ComponentTranslationsGlossaryDefinitionTranslatorsArgs = {
+  filters?: InputMaybe<RecorderFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type ComponentTranslationsGlossaryDefinitionFiltersInput = {
@@ -1427,16 +1451,22 @@ export type ComponentTranslationsGlossaryDefinitionFiltersInput = {
   language?: InputMaybe<LanguageFiltersInput>;
   not?: InputMaybe<ComponentTranslationsGlossaryDefinitionFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ComponentTranslationsGlossaryDefinitionFiltersInput>>>;
+  proofreaders?: InputMaybe<RecorderFiltersInput>;
   source_language?: InputMaybe<LanguageFiltersInput>;
   status?: InputMaybe<StringFilterInput>;
+  transcribers?: InputMaybe<RecorderFiltersInput>;
+  translators?: InputMaybe<RecorderFiltersInput>;
 };
 
 export type ComponentTranslationsGlossaryDefinitionInput = {
   definition?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   language?: InputMaybe<Scalars['ID']>;
+  proofreaders?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   source_language?: InputMaybe<Scalars['ID']>;
   status?: InputMaybe<Enum_Componenttranslationsglossarydefinition_Status>;
+  transcribers?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  translators?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type ComponentTranslationsGlossaryItem = {
@@ -2758,6 +2788,7 @@ export type LibraryItem = {
   createdAt?: Maybe<Scalars['DateTime']>;
   descriptions?: Maybe<Array<Maybe<ComponentTranslationsLibraryItems>>>;
   digital: Scalars['Boolean'];
+  download_available: Scalars['Boolean'];
   gallery?: Maybe<UploadFileRelationResponseCollection>;
   images?: Maybe<Array<Maybe<ComponentCollectionsComponentLibraryImages>>>;
   metadata?: Maybe<Array<Maybe<LibraryItemMetadataDynamicZone>>>;
@@ -2864,6 +2895,7 @@ export type LibraryItemFiltersInput = {
   createdAt?: InputMaybe<DateTimeFilterInput>;
   descriptions?: InputMaybe<ComponentTranslationsLibraryItemsFiltersInput>;
   digital?: InputMaybe<BooleanFilterInput>;
+  download_available?: InputMaybe<BooleanFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   images?: InputMaybe<ComponentCollectionsComponentLibraryImagesFiltersInput>;
   not?: InputMaybe<LibraryItemFiltersInput>;
@@ -2888,6 +2920,7 @@ export type LibraryItemInput = {
   contents?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   descriptions?: InputMaybe<Array<InputMaybe<ComponentTranslationsLibraryItemsInput>>>;
   digital?: InputMaybe<Scalars['Boolean']>;
+  download_available?: InputMaybe<Scalars['Boolean']>;
   gallery?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   images?: InputMaybe<Array<InputMaybe<ComponentCollectionsComponentLibraryImagesInput>>>;
   metadata?: InputMaybe<Array<Scalars['LibraryItemMetadataDynamicZoneInput']>>;
@@ -5423,6 +5456,7 @@ export type WebsiteInterface = {
   display_all_items?: Maybe<Scalars['String']>;
   done?: Maybe<Scalars['String']>;
   double_page_view?: Maybe<Scalars['String']>;
+  download_scans?: Maybe<Scalars['String']>;
   draft?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   email_gdpr_notice?: Maybe<Scalars['String']>;
@@ -5480,6 +5514,8 @@ export type WebsiteInterface = {
   page_order?: Maybe<Scalars['String']>;
   paper_texture?: Maybe<Scalars['String']>;
   paperback?: Maybe<Scalars['String']>;
+  performance_mode?: Maybe<Scalars['String']>;
+  performance_mode_tooltip?: Maybe<Scalars['String']>;
   player_name?: Maybe<Scalars['String']>;
   player_name_tooltip?: Maybe<Scalars['String']>;
   previous_content?: Maybe<Scalars['String']>;
@@ -5504,6 +5540,7 @@ export type WebsiteInterface = {
   scanlation?: Maybe<Scalars['String']>;
   scanners?: Maybe<Scalars['String']>;
   search?: Maybe<Scalars['String']>;
+  search_placeholder?: Maybe<Scalars['String']>;
   search_title?: Maybe<Scalars['String']>;
   secondary_language?: Maybe<Scalars['String']>;
   select_language?: Maybe<Scalars['String']>;
@@ -5629,6 +5666,7 @@ export type WebsiteInterfaceFiltersInput = {
   display_all_items?: InputMaybe<StringFilterInput>;
   done?: InputMaybe<StringFilterInput>;
   double_page_view?: InputMaybe<StringFilterInput>;
+  download_scans?: InputMaybe<StringFilterInput>;
   draft?: InputMaybe<StringFilterInput>;
   email?: InputMaybe<StringFilterInput>;
   email_gdpr_notice?: InputMaybe<StringFilterInput>;
@@ -5689,6 +5727,8 @@ export type WebsiteInterfaceFiltersInput = {
   page_order?: InputMaybe<StringFilterInput>;
   paper_texture?: InputMaybe<StringFilterInput>;
   paperback?: InputMaybe<StringFilterInput>;
+  performance_mode?: InputMaybe<StringFilterInput>;
+  performance_mode_tooltip?: InputMaybe<StringFilterInput>;
   player_name?: InputMaybe<StringFilterInput>;
   player_name_tooltip?: InputMaybe<StringFilterInput>;
   previous_content?: InputMaybe<StringFilterInput>;
@@ -5713,6 +5753,7 @@ export type WebsiteInterfaceFiltersInput = {
   scanlation?: InputMaybe<StringFilterInput>;
   scanners?: InputMaybe<StringFilterInput>;
   search?: InputMaybe<StringFilterInput>;
+  search_placeholder?: InputMaybe<StringFilterInput>;
   search_title?: InputMaybe<StringFilterInput>;
   secondary_language?: InputMaybe<StringFilterInput>;
   select_language?: InputMaybe<StringFilterInput>;
@@ -5819,6 +5860,7 @@ export type WebsiteInterfaceInput = {
   display_all_items?: InputMaybe<Scalars['String']>;
   done?: InputMaybe<Scalars['String']>;
   double_page_view?: InputMaybe<Scalars['String']>;
+  download_scans?: InputMaybe<Scalars['String']>;
   draft?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   email_gdpr_notice?: InputMaybe<Scalars['String']>;
@@ -5876,6 +5918,8 @@ export type WebsiteInterfaceInput = {
   page_order?: InputMaybe<Scalars['String']>;
   paper_texture?: InputMaybe<Scalars['String']>;
   paperback?: InputMaybe<Scalars['String']>;
+  performance_mode?: InputMaybe<Scalars['String']>;
+  performance_mode_tooltip?: InputMaybe<Scalars['String']>;
   player_name?: InputMaybe<Scalars['String']>;
   player_name_tooltip?: InputMaybe<Scalars['String']>;
   previous_content?: InputMaybe<Scalars['String']>;
@@ -5900,6 +5944,7 @@ export type WebsiteInterfaceInput = {
   scanlation?: InputMaybe<Scalars['String']>;
   scanners?: InputMaybe<Scalars['String']>;
   search?: InputMaybe<Scalars['String']>;
+  search_placeholder?: InputMaybe<Scalars['String']>;
   search_title?: InputMaybe<Scalars['String']>;
   secondary_language?: InputMaybe<Scalars['String']>;
   select_language?: InputMaybe<Scalars['String']>;

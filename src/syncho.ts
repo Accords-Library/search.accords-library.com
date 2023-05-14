@@ -17,8 +17,15 @@ export const synchronizeStrapiAndMeili = async (): Promise<void> => {
       strapiToMeiliTransformFunctions.libraryItem(item)
     ),
     ["title", "subtitle", "descriptions"],
-    ["sortable_name", "sortable_date", "sortable_price"],
-    ["primary", "root_item", "id", "untangible_group_item", "filterable_categories"]
+    ["sortable_name", "sortable_date", "sortable_price", "groupable_year"],
+    [
+      "primary",
+      "root_item",
+      "id",
+      "untangible_group_item",
+      "filterable_categories",
+      "groupable_year",
+    ]
   );
 
   // [ CONTENT ]

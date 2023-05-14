@@ -67,6 +67,7 @@ const transformLibraryItem: TransformFunction<MeiliIndices.LIBRARY_ITEM> = (data
   const { id, attributes } = data;
   return {
     id,
+    groupable_year: attributes.release_date?.year ?? undefined,
     sortable_date: isDefined(attributes.release_date)
       ? getUnixTime(datePickerToDate(attributes.release_date))
       : undefined,
