@@ -1,1 +1,1 @@
-npx esrun --tsconfig=./tsconfig.json src/app.ts
+npm run start
