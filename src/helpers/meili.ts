@@ -6,7 +6,7 @@ import {
   isDefinedAndNotEmpty,
 } from "core/helpers/asserts";
 import { datePickerToDate, getUnixTime } from "core/helpers/date";
-import { prettyInlineTitle } from "core/helpers/formatters";
+import { prettyInlineTitle, prettyMarkdown } from "core/helpers/formatters";
 import { isUntangibleGroupItem } from "core/helpers/libraryItem";
 import { MeiliSearch } from "meilisearch";
 
@@ -47,9 +47,9 @@ const transformContent: TransformFunction<MeiliIndices.CONTENT> = (data) => {
     translations: filterDefined(translations).map(
       ({ text_set, description, ...otherTranslatedFields }) => {
         let displayable_description = "";
-        if (isDefinedAndNotEmpty(description)) displayable_description += description;
-        if (isDefinedAndNotEmpty(text_set?.text))
-          displayable_description += `\n\n${text_set?.text}`;
+        if (isDefinedAndNotEmpty(description))
+          displayable_description += prettyMarkdown(description);
+        if (text_set?.text) displayable_description += `\n\n${prettyMarkdown(text_set.text)}`;
         return {
           ...otherTranslatedFields,
           displayable_description,
@@ -88,11 +88,24 @@ const transformPost: TransformFunction<MeiliIndices.POST> = (data) => {
   if (!data) throw new Error(`Data is empty ${MeiliIndices.POST}`);
   if (!data.attributes || !data.id)
     throw new Error(`Incorrect data stucture on ${MeiliIndices.POST}`);
-  const { id, attributes } = data;
+  const {
+    id,
+    attributes: { translations, ...otherAttributes },
+  } = data;
   return {
     id,
-    ...attributes,
-    sortable_date: getUnixTime(datePickerToDate(attributes.date)),
+    sortable_date: getUnixTime(datePickerToDate(otherAttributes.date)),
+    translations: filterDefined(translations).map(({ body, excerpt, ...otherTranslatedFields }) => {
+      let displayable_description = "";
+      if (isDefinedAndNotEmpty(excerpt)) displayable_description += prettyMarkdown(excerpt);
+      if (body) displayable_description += `\n\n${prettyMarkdown(body)}`;
+      return {
+        ...otherTranslatedFields,
+        excerpt,
+        displayable_description,
+      };
+    }),
+    ...otherAttributes,
   };
 };
 

@@ -60,7 +60,7 @@ export const synchronizeStrapiAndMeili = async (): Promise<void> => {
   processIndex(
     MeiliIndices.POST,
     posts.posts?.data.map((item) => strapiToMeiliTransformFunctions.post(item)),
-    ["translations.title", "translations.excerpt", "translations.body"],
+    ["translations.title", "translations.displayable_description"],
     ["sortable_date"],
     ["hidden"]
   );

@@ -41,9 +41,15 @@ export interface MeiliVideo extends VideoAttributesFragment {
   channel_uid?: string;
 }
 
-export interface MeiliPost extends PostAttributesFragment {
+export interface MeiliPost extends Omit<PostAttributesFragment, "translations"> {
   id: string;
   sortable_date: number;
+  translations: (Omit<
+    NonNullable<NonNullable<PostAttributesFragment["translations"]>[number]>,
+    "body"
+  > & {
+    displayable_description?: string | null;
+  })[];
 }
 
 export interface MeiliWikiPage extends Omit<WikiPageAttributesFragment, "translations"> {
