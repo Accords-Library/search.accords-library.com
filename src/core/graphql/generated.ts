@@ -99,7 +99,16 @@ export type Category = {
   name: Scalars['String'];
   series?: Maybe<Enum_Category_Series>;
   short: Scalars['String'];
+  slug: Scalars['String'];
+  titles?: Maybe<Array<Maybe<ComponentTranslationsCategoriesTitle>>>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type CategoryTitlesArgs = {
+  filters?: InputMaybe<ComponentTranslationsCategoriesTitleFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type CategoryEntity = {
@@ -128,6 +137,8 @@ export type CategoryFiltersInput = {
   or?: InputMaybe<Array<InputMaybe<CategoryFiltersInput>>>;
   series?: InputMaybe<StringFilterInput>;
   short?: InputMaybe<StringFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
+  titles?: InputMaybe<ComponentTranslationsCategoriesTitleFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
@@ -135,6 +146,8 @@ export type CategoryInput = {
   name?: InputMaybe<Scalars['String']>;
   series?: InputMaybe<Enum_Category_Series>;
   short?: InputMaybe<Scalars['String']>;
+  slug?: InputMaybe<Scalars['String']>;
+  titles?: InputMaybe<Array<InputMaybe<ComponentTranslationsCategoriesTitleInput>>>;
 };
 
 export type CategoryRelationResponseCollection = {
@@ -936,6 +949,14 @@ export type ComponentMetadataAudio = {
   __typename?: 'ComponentMetadataAudio';
   id: Scalars['ID'];
   subtype?: Maybe<AudioSubtypeEntityResponse>;
+  tracks?: Maybe<Array<Maybe<ComponentSetsTrackSet>>>;
+};
+
+
+export type ComponentMetadataAudioTracksArgs = {
+  filters?: InputMaybe<ComponentSetsTrackSetFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type ComponentMetadataBooks = {
@@ -961,6 +982,7 @@ export type ComponentMetadataGame = {
   demo: Scalars['Boolean'];
   id: Scalars['ID'];
   interface_languages?: Maybe<LanguageRelationResponseCollection>;
+  platform?: Maybe<GamePlatformEntityResponse>;
   platforms?: Maybe<GamePlatformRelationResponseCollection>;
   sub_languages?: Maybe<LanguageRelationResponseCollection>;
 };
@@ -1069,8 +1091,7 @@ export type ComponentRangeTimeRange = {
 
 export type ComponentSetsAudioSet = {
   __typename?: 'ComponentSetsAudioSet';
-  audiofile?: Maybe<UploadFileRelationResponseCollection>;
-  dubbers?: Maybe<RecorderEntityResponse>;
+  dubbers?: Maybe<RecorderRelationResponseCollection>;
   id: Scalars['ID'];
   notes?: Maybe<Scalars['String']>;
   source_language?: Maybe<LanguageEntityResponse>;
@@ -1078,8 +1099,8 @@ export type ComponentSetsAudioSet = {
 };
 
 
-export type ComponentSetsAudioSetAudiofileArgs = {
-  filters?: InputMaybe<UploadFileFiltersInput>;
+export type ComponentSetsAudioSetDubbersArgs = {
+  filters?: InputMaybe<RecorderFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -1095,8 +1116,7 @@ export type ComponentSetsAudioSetFiltersInput = {
 };
 
 export type ComponentSetsAudioSetInput = {
-  audiofile?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  dubbers?: InputMaybe<Scalars['ID']>;
+  dubbers?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   id?: InputMaybe<Scalars['ID']>;
   notes?: InputMaybe<Scalars['String']>;
   source_language?: InputMaybe<Scalars['ID']>;
@@ -1226,36 +1246,56 @@ export type ComponentSetsTextSetInput = {
   translators?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
+export type ComponentSetsTrackSet = {
+  __typename?: 'ComponentSetsTrackSet';
+  id: Scalars['ID'];
+  slug: Scalars['String'];
+  title: Scalars['String'];
+};
+
+export type ComponentSetsTrackSetFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentSetsTrackSetFiltersInput>>>;
+  not?: InputMaybe<ComponentSetsTrackSetFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentSetsTrackSetFiltersInput>>>;
+  slug?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+};
+
 export type ComponentSetsVideoSet = {
   __typename?: 'ComponentSetsVideoSet';
+  has_subfile: Scalars['Boolean'];
   id: Scalars['ID'];
   notes?: Maybe<Scalars['String']>;
   source_language?: Maybe<LanguageEntityResponse>;
   status: Enum_Componentsetsvideoset_Status;
-  subbers?: Maybe<RecorderEntityResponse>;
-  subfile?: Maybe<UploadFileEntityResponse>;
-  video_url?: Maybe<Scalars['String']>;
+  subbers?: Maybe<RecorderRelationResponseCollection>;
+};
+
+
+export type ComponentSetsVideoSetSubbersArgs = {
+  filters?: InputMaybe<RecorderFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type ComponentSetsVideoSetFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<ComponentSetsVideoSetFiltersInput>>>;
+  has_subfile?: InputMaybe<BooleanFilterInput>;
   not?: InputMaybe<ComponentSetsVideoSetFiltersInput>;
   notes?: InputMaybe<StringFilterInput>;
   or?: InputMaybe<Array<InputMaybe<ComponentSetsVideoSetFiltersInput>>>;
   source_language?: InputMaybe<LanguageFiltersInput>;
   status?: InputMaybe<StringFilterInput>;
   subbers?: InputMaybe<RecorderFiltersInput>;
-  video_url?: InputMaybe<StringFilterInput>;
 };
 
 export type ComponentSetsVideoSetInput = {
+  has_subfile?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['ID']>;
   notes?: InputMaybe<Scalars['String']>;
   source_language?: InputMaybe<Scalars['ID']>;
   status?: InputMaybe<Enum_Componentsetsvideoset_Status>;
-  subbers?: InputMaybe<Scalars['ID']>;
-  subfile?: InputMaybe<Scalars['ID']>;
-  video_url?: InputMaybe<Scalars['String']>;
+  subbers?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type ComponentSetsWikiSet = {
@@ -1329,6 +1369,30 @@ export type ComponentTranslationsBioInput = {
   bio?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   language?: InputMaybe<Scalars['ID']>;
+};
+
+export type ComponentTranslationsCategoriesTitle = {
+  __typename?: 'ComponentTranslationsCategoriesTitle';
+  id: Scalars['ID'];
+  language?: Maybe<LanguageEntityResponse>;
+  short?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type ComponentTranslationsCategoriesTitleFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentTranslationsCategoriesTitleFiltersInput>>>;
+  language?: InputMaybe<LanguageFiltersInput>;
+  not?: InputMaybe<ComponentTranslationsCategoriesTitleFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentTranslationsCategoriesTitleFiltersInput>>>;
+  short?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentTranslationsCategoriesTitleInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  language?: InputMaybe<Scalars['ID']>;
+  short?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
 };
 
 export type ComponentTranslationsChronicles = {
@@ -1409,6 +1473,30 @@ export type ComponentTranslationsChronologyItemInput = {
   language?: InputMaybe<Scalars['ID']>;
   note?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<Enum_Componenttranslationschronologyitem_Status>;
+  title?: InputMaybe<Scalars['String']>;
+};
+
+export type ComponentTranslationsGamePlatformsTranslations = {
+  __typename?: 'ComponentTranslationsGamePlatformsTranslations';
+  id: Scalars['ID'];
+  language?: Maybe<LanguageEntityResponse>;
+  short?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type ComponentTranslationsGamePlatformsTranslationsFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentTranslationsGamePlatformsTranslationsFiltersInput>>>;
+  language?: InputMaybe<LanguageFiltersInput>;
+  not?: InputMaybe<ComponentTranslationsGamePlatformsTranslationsFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentTranslationsGamePlatformsTranslationsFiltersInput>>>;
+  short?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentTranslationsGamePlatformsTranslationsInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  language?: InputMaybe<Scalars['ID']>;
+  short?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -2470,7 +2558,16 @@ export type GamePlatform = {
   createdAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
   short: Scalars['String'];
+  slug: Scalars['String'];
+  titles?: Maybe<Array<Maybe<ComponentTranslationsGamePlatformsTranslations>>>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type GamePlatformTitlesArgs = {
+  filters?: InputMaybe<ComponentTranslationsGamePlatformsTranslationsFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type GamePlatformEntity = {
@@ -2498,12 +2595,16 @@ export type GamePlatformFiltersInput = {
   not?: InputMaybe<GamePlatformFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<GamePlatformFiltersInput>>>;
   short?: InputMaybe<StringFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
+  titles?: InputMaybe<ComponentTranslationsGamePlatformsTranslationsFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type GamePlatformInput = {
   name?: InputMaybe<Scalars['String']>;
   short?: InputMaybe<Scalars['String']>;
+  slug?: InputMaybe<Scalars['String']>;
+  titles?: InputMaybe<Array<InputMaybe<ComponentTranslationsGamePlatformsTranslationsInput>>>;
 };
 
 export type GamePlatformRelationResponseCollection = {
@@ -2511,7 +2612,7 @@ export type GamePlatformRelationResponseCollection = {
   data: Array<GamePlatformEntity>;
 };
 
-export type GenericMorph = AudioSubtype | Category | Chronicle | ChroniclesChapter | ChronologyEra | ChronologyItem | ComponentBasicsCredits | ComponentBasicsDatepicker | ComponentBasicsFileSize | ComponentBasicsPrice | ComponentBasicsSize | ComponentBasicsUrl | ComponentCollectionsComponentAliases | ComponentCollectionsComponentBody | ComponentCollectionsComponentDefinition | ComponentCollectionsComponentEvent | ComponentCollectionsComponentGlossaryDefinition | ComponentCollectionsComponentLibraryCover | ComponentCollectionsComponentLibraryDustJacket | ComponentCollectionsComponentLibraryImages | ComponentCollectionsComponentLibraryObiBelt | ComponentCollectionsComponentTitles | ComponentCollectionsComponentWeaponStory | ComponentCollectionsComponentWikiDefinition | ComponentMetadataAudio | ComponentMetadataBooks | ComponentMetadataGame | ComponentMetadataGroup | ComponentMetadataMerch | ComponentMetadataOther | ComponentMetadataVideo | ComponentPageBuilderGallery | ComponentPageBuilderGrid | ComponentPageBuilderTabs | ComponentRangeGameAspect | ComponentRangeOther | ComponentRangePageRange | ComponentRangeTimeRange | ComponentSetsAudioSet | ComponentSetsScanSet | ComponentSetsTextSet | ComponentSetsVideoSet | ComponentSetsWikiSet | ComponentSourceUrlSource | ComponentTranslationsAudioSets | ComponentTranslationsBio | ComponentTranslationsChronicles | ComponentTranslationsChronologyEra | ComponentTranslationsChronologyItem | ComponentTranslationsGlossaryDefinition | ComponentTranslationsGlossaryItem | ComponentTranslationsLibraryContent | ComponentTranslationsLibraryItems | ComponentTranslationsPosts | ComponentTranslationsReinCostumes | ComponentTranslationsReinEmblems | ComponentTranslationsScanSet | ComponentTranslationsSimpleTitle | ComponentTranslationsTextSet | ComponentTranslationsTitle | ComponentTranslationsVideoSets | ComponentTranslationsWeaponStory | ComponentTranslationsWeaponStoryStory | ComponentTranslationsWeaponStoryType | ComponentTranslationsWebArchives | ComponentTranslationsWiki | ComponentTranslationsWikiPost | ComponentWikiSpecializationChronology | ComponentWikiSpecializationGlossaryItem | ComponentWikiSpecializationPost | ComponentWikiSpecializationWeapon | Content | ContentType | ContentsFolder | Currency | GamePlatform | GlossaryItem | GlossaryItemType | GroupSubtype | Language | LibraryItem | MerchItem | MetadataType | Post | RangedContent | Recorder | ReinCostume | ReinEmblem | Source | TextualSubtype | UploadFile | UploadFolder | Video | VideoChannel | VideoSubtype | WeaponStory | WeaponStoryGroup | WeaponStoryType | WebArchive | WebsiteInterface | WikiPage | WikiPagesTag;
+export type GenericMorph = AudioSubtype | Category | Chronicle | ChroniclesChapter | ChronologyEra | ChronologyItem | ComponentBasicsCredits | ComponentBasicsDatepicker | ComponentBasicsFileSize | ComponentBasicsPrice | ComponentBasicsSize | ComponentBasicsUrl | ComponentCollectionsComponentAliases | ComponentCollectionsComponentBody | ComponentCollectionsComponentDefinition | ComponentCollectionsComponentEvent | ComponentCollectionsComponentGlossaryDefinition | ComponentCollectionsComponentLibraryCover | ComponentCollectionsComponentLibraryDustJacket | ComponentCollectionsComponentLibraryImages | ComponentCollectionsComponentLibraryObiBelt | ComponentCollectionsComponentTitles | ComponentCollectionsComponentWeaponStory | ComponentCollectionsComponentWikiDefinition | ComponentMetadataAudio | ComponentMetadataBooks | ComponentMetadataGame | ComponentMetadataGroup | ComponentMetadataMerch | ComponentMetadataOther | ComponentMetadataVideo | ComponentPageBuilderGallery | ComponentPageBuilderGrid | ComponentPageBuilderTabs | ComponentRangeGameAspect | ComponentRangeOther | ComponentRangePageRange | ComponentRangeTimeRange | ComponentSetsAudioSet | ComponentSetsScanSet | ComponentSetsTextSet | ComponentSetsTrackSet | ComponentSetsVideoSet | ComponentSetsWikiSet | ComponentSourceUrlSource | ComponentTranslationsAudioSets | ComponentTranslationsBio | ComponentTranslationsCategoriesTitle | ComponentTranslationsChronicles | ComponentTranslationsChronologyEra | ComponentTranslationsChronologyItem | ComponentTranslationsGamePlatformsTranslations | ComponentTranslationsGlossaryDefinition | ComponentTranslationsGlossaryItem | ComponentTranslationsLibraryContent | ComponentTranslationsLibraryItems | ComponentTranslationsPosts | ComponentTranslationsReinCostumes | ComponentTranslationsReinEmblems | ComponentTranslationsScanSet | ComponentTranslationsSimpleTitle | ComponentTranslationsTextSet | ComponentTranslationsTitle | ComponentTranslationsVideoSets | ComponentTranslationsWeaponStory | ComponentTranslationsWeaponStoryStory | ComponentTranslationsWeaponStoryType | ComponentTranslationsWebArchives | ComponentTranslationsWiki | ComponentTranslationsWikiPost | ComponentWikiSpecializationChronology | ComponentWikiSpecializationGlossaryItem | ComponentWikiSpecializationPost | ComponentWikiSpecializationWeapon | Content | ContentType | ContentsFolder | Currency | GamePlatform | GlossaryItem | GlossaryItemType | GroupSubtype | Language | LibraryItem | MerchItem | MetadataType | Post | RangedContent | Recorder | ReinCostume | ReinEmblem | Source | TextualSubtype | UploadFile | UploadFolder | Video | VideoChannel | VideoSubtype | WeaponStory | WeaponStoryGroup | WeaponStoryType | WebArchive | WebsiteInterface | WikiPage | WikiPagesTag;
 
 export type GlossaryItem = {
   __typename?: 'GlossaryItem';
@@ -5421,21 +5522,21 @@ export type WebsiteInterface = {
   archives?: Maybe<Scalars['String']>;
   archives_description?: Maybe<Scalars['String']>;
   audio?: Maybe<Scalars['String']>;
+  author?: Maybe<Scalars['String']>;
   auto?: Maybe<Scalars['String']>;
   available_at?: Maybe<Scalars['String']>;
+  available_at_x?: Maybe<Scalars['String']>;
   back_matter?: Maybe<Scalars['String']>;
   binding?: Maybe<Scalars['String']>;
   book_fold?: Maybe<Scalars['String']>;
   calculated?: Maybe<Scalars['String']>;
   category?: Maybe<Scalars['String']>;
-  change_language?: Maybe<Scalars['String']>;
   channel?: Maybe<Scalars['String']>;
   chronicles?: Maybe<Scalars['String']>;
   chronicles_description?: Maybe<Scalars['String']>;
   chronicles_short_description?: Maybe<Scalars['String']>;
   chronology?: Maybe<Scalars['String']>;
   cleaners?: Maybe<Scalars['String']>;
-  combine_related_contents?: Maybe<Scalars['String']>;
   contact_us?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
   content_is_not_available?: Maybe<Scalars['String']>;
@@ -5453,11 +5554,11 @@ export type WebsiteInterface = {
   definition_x?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   details?: Maybe<Scalars['String']>;
-  display_all_items?: Maybe<Scalars['String']>;
   done?: Maybe<Scalars['String']>;
   double_page_view?: Maybe<Scalars['String']>;
-  download_scans?: Maybe<Scalars['String']>;
+  download_archive?: Maybe<Scalars['String']>;
   draft?: Maybe<Scalars['String']>;
+  dubber?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   email_gdpr_notice?: Maybe<Scalars['String']>;
   empty_folder_message?: Maybe<Scalars['String']>;
@@ -5522,7 +5623,7 @@ export type WebsiteInterface = {
   price?: Maybe<Scalars['String']>;
   primary_language?: Maybe<Scalars['String']>;
   pronouns?: Maybe<Scalars['String']>;
-  proofreaders?: Maybe<Scalars['String']>;
+  proofreader?: Maybe<Scalars['String']>;
   quality?: Maybe<Scalars['String']>;
   read_content?: Maybe<Scalars['String']>;
   reading_layout?: Maybe<Scalars['String']>;
@@ -5541,9 +5642,7 @@ export type WebsiteInterface = {
   scanners?: Maybe<Scalars['String']>;
   search?: Maybe<Scalars['String']>;
   search_placeholder?: Maybe<Scalars['String']>;
-  search_title?: Maybe<Scalars['String']>;
   secondary_language?: Maybe<Scalars['String']>;
-  select_language?: Maybe<Scalars['String']>;
   select_option_sidebar?: Maybe<Scalars['String']>;
   send?: Maybe<Scalars['String']>;
   settings?: Maybe<Scalars['String']>;
@@ -5566,6 +5665,7 @@ export type WebsiteInterface = {
   status_incomplete?: Maybe<Scalars['String']>;
   status_review?: Maybe<Scalars['String']>;
   story_x?: Maybe<Scalars['String']>;
+  subber?: Maybe<Scalars['String']>;
   subitem?: Maybe<Scalars['String']>;
   subitem_of_x?: Maybe<Scalars['String']>;
   subscribers?: Maybe<Scalars['String']>;
@@ -5577,10 +5677,10 @@ export type WebsiteInterface = {
   textual?: Maybe<Scalars['String']>;
   theme?: Maybe<Scalars['String']>;
   thickness?: Maybe<Scalars['String']>;
-  transcribers?: Maybe<Scalars['String']>;
+  transcriber?: Maybe<Scalars['String']>;
   transcript_notice?: Maybe<Scalars['String']>;
   translation_notice?: Maybe<Scalars['String']>;
-  translators?: Maybe<Scalars['String']>;
+  translator?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   type_information?: Maybe<Scalars['String']>;
   typesetters?: Maybe<Scalars['String']>;
@@ -5591,6 +5691,7 @@ export type WebsiteInterface = {
   video?: Maybe<Scalars['String']>;
   videos?: Maybe<Scalars['String']>;
   view_on?: Maybe<Scalars['String']>;
+  view_on_x?: Maybe<Scalars['String']>;
   view_scans?: Maybe<Scalars['String']>;
   want_it?: Maybe<Scalars['String']>;
   watch_content?: Maybe<Scalars['String']>;
@@ -5631,21 +5732,21 @@ export type WebsiteInterfaceFiltersInput = {
   archives?: InputMaybe<StringFilterInput>;
   archives_description?: InputMaybe<StringFilterInput>;
   audio?: InputMaybe<StringFilterInput>;
+  author?: InputMaybe<StringFilterInput>;
   auto?: InputMaybe<StringFilterInput>;
   available_at?: InputMaybe<StringFilterInput>;
+  available_at_x?: InputMaybe<StringFilterInput>;
   back_matter?: InputMaybe<StringFilterInput>;
   binding?: InputMaybe<StringFilterInput>;
   book_fold?: InputMaybe<StringFilterInput>;
   calculated?: InputMaybe<StringFilterInput>;
   category?: InputMaybe<StringFilterInput>;
-  change_language?: InputMaybe<StringFilterInput>;
   channel?: InputMaybe<StringFilterInput>;
   chronicles?: InputMaybe<StringFilterInput>;
   chronicles_description?: InputMaybe<StringFilterInput>;
   chronicles_short_description?: InputMaybe<StringFilterInput>;
   chronology?: InputMaybe<StringFilterInput>;
   cleaners?: InputMaybe<StringFilterInput>;
-  combine_related_contents?: InputMaybe<StringFilterInput>;
   contact_us?: InputMaybe<StringFilterInput>;
   content?: InputMaybe<StringFilterInput>;
   content_is_not_available?: InputMaybe<StringFilterInput>;
@@ -5663,11 +5764,11 @@ export type WebsiteInterfaceFiltersInput = {
   definition_x?: InputMaybe<StringFilterInput>;
   description?: InputMaybe<StringFilterInput>;
   details?: InputMaybe<StringFilterInput>;
-  display_all_items?: InputMaybe<StringFilterInput>;
   done?: InputMaybe<StringFilterInput>;
   double_page_view?: InputMaybe<StringFilterInput>;
-  download_scans?: InputMaybe<StringFilterInput>;
+  download_archive?: InputMaybe<StringFilterInput>;
   draft?: InputMaybe<StringFilterInput>;
+  dubber?: InputMaybe<StringFilterInput>;
   email?: InputMaybe<StringFilterInput>;
   email_gdpr_notice?: InputMaybe<StringFilterInput>;
   empty_folder_message?: InputMaybe<StringFilterInput>;
@@ -5735,7 +5836,7 @@ export type WebsiteInterfaceFiltersInput = {
   price?: InputMaybe<StringFilterInput>;
   primary_language?: InputMaybe<StringFilterInput>;
   pronouns?: InputMaybe<StringFilterInput>;
-  proofreaders?: InputMaybe<StringFilterInput>;
+  proofreader?: InputMaybe<StringFilterInput>;
   quality?: InputMaybe<StringFilterInput>;
   read_content?: InputMaybe<StringFilterInput>;
   reading_layout?: InputMaybe<StringFilterInput>;
@@ -5754,9 +5855,7 @@ export type WebsiteInterfaceFiltersInput = {
   scanners?: InputMaybe<StringFilterInput>;
   search?: InputMaybe<StringFilterInput>;
   search_placeholder?: InputMaybe<StringFilterInput>;
-  search_title?: InputMaybe<StringFilterInput>;
   secondary_language?: InputMaybe<StringFilterInput>;
-  select_language?: InputMaybe<StringFilterInput>;
   select_option_sidebar?: InputMaybe<StringFilterInput>;
   send?: InputMaybe<StringFilterInput>;
   settings?: InputMaybe<StringFilterInput>;
@@ -5779,6 +5878,7 @@ export type WebsiteInterfaceFiltersInput = {
   status_incomplete?: InputMaybe<StringFilterInput>;
   status_review?: InputMaybe<StringFilterInput>;
   story_x?: InputMaybe<StringFilterInput>;
+  subber?: InputMaybe<StringFilterInput>;
   subitem?: InputMaybe<StringFilterInput>;
   subitem_of_x?: InputMaybe<StringFilterInput>;
   subscribers?: InputMaybe<StringFilterInput>;
@@ -5790,10 +5890,10 @@ export type WebsiteInterfaceFiltersInput = {
   textual?: InputMaybe<StringFilterInput>;
   theme?: InputMaybe<StringFilterInput>;
   thickness?: InputMaybe<StringFilterInput>;
-  transcribers?: InputMaybe<StringFilterInput>;
+  transcriber?: InputMaybe<StringFilterInput>;
   transcript_notice?: InputMaybe<StringFilterInput>;
   translation_notice?: InputMaybe<StringFilterInput>;
-  translators?: InputMaybe<StringFilterInput>;
+  translator?: InputMaybe<StringFilterInput>;
   type?: InputMaybe<StringFilterInput>;
   type_information?: InputMaybe<StringFilterInput>;
   typesetters?: InputMaybe<StringFilterInput>;
@@ -5804,6 +5904,7 @@ export type WebsiteInterfaceFiltersInput = {
   video?: InputMaybe<StringFilterInput>;
   videos?: InputMaybe<StringFilterInput>;
   view_on?: InputMaybe<StringFilterInput>;
+  view_on_x?: InputMaybe<StringFilterInput>;
   view_scans?: InputMaybe<StringFilterInput>;
   want_it?: InputMaybe<StringFilterInput>;
   watch_content?: InputMaybe<StringFilterInput>;
@@ -5826,21 +5927,21 @@ export type WebsiteInterfaceInput = {
   archives?: InputMaybe<Scalars['String']>;
   archives_description?: InputMaybe<Scalars['String']>;
   audio?: InputMaybe<Scalars['String']>;
+  author?: InputMaybe<Scalars['String']>;
   auto?: InputMaybe<Scalars['String']>;
   available_at?: InputMaybe<Scalars['String']>;
+  available_at_x?: InputMaybe<Scalars['String']>;
   back_matter?: InputMaybe<Scalars['String']>;
   binding?: InputMaybe<Scalars['String']>;
   book_fold?: InputMaybe<Scalars['String']>;
   calculated?: InputMaybe<Scalars['String']>;
   category?: InputMaybe<Scalars['String']>;
-  change_language?: InputMaybe<Scalars['String']>;
   channel?: InputMaybe<Scalars['String']>;
   chronicles?: InputMaybe<Scalars['String']>;
   chronicles_description?: InputMaybe<Scalars['String']>;
   chronicles_short_description?: InputMaybe<Scalars['String']>;
   chronology?: InputMaybe<Scalars['String']>;
   cleaners?: InputMaybe<Scalars['String']>;
-  combine_related_contents?: InputMaybe<Scalars['String']>;
   contact_us?: InputMaybe<Scalars['String']>;
   content?: InputMaybe<Scalars['String']>;
   content_is_not_available?: InputMaybe<Scalars['String']>;
@@ -5857,11 +5958,11 @@ export type WebsiteInterfaceInput = {
   definition_x?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   details?: InputMaybe<Scalars['String']>;
-  display_all_items?: InputMaybe<Scalars['String']>;
   done?: InputMaybe<Scalars['String']>;
   double_page_view?: InputMaybe<Scalars['String']>;
-  download_scans?: InputMaybe<Scalars['String']>;
+  download_archive?: InputMaybe<Scalars['String']>;
   draft?: InputMaybe<Scalars['String']>;
+  dubber?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   email_gdpr_notice?: InputMaybe<Scalars['String']>;
   empty_folder_message?: InputMaybe<Scalars['String']>;
@@ -5926,7 +6027,7 @@ export type WebsiteInterfaceInput = {
   price?: InputMaybe<Scalars['String']>;
   primary_language?: InputMaybe<Scalars['String']>;
   pronouns?: InputMaybe<Scalars['String']>;
-  proofreaders?: InputMaybe<Scalars['String']>;
+  proofreader?: InputMaybe<Scalars['String']>;
   quality?: InputMaybe<Scalars['String']>;
   read_content?: InputMaybe<Scalars['String']>;
   reading_layout?: InputMaybe<Scalars['String']>;
@@ -5945,9 +6046,7 @@ export type WebsiteInterfaceInput = {
   scanners?: InputMaybe<Scalars['String']>;
   search?: InputMaybe<Scalars['String']>;
   search_placeholder?: InputMaybe<Scalars['String']>;
-  search_title?: InputMaybe<Scalars['String']>;
   secondary_language?: InputMaybe<Scalars['String']>;
-  select_language?: InputMaybe<Scalars['String']>;
   select_option_sidebar?: InputMaybe<Scalars['String']>;
   send?: InputMaybe<Scalars['String']>;
   settings?: InputMaybe<Scalars['String']>;
@@ -5970,6 +6069,7 @@ export type WebsiteInterfaceInput = {
   status_incomplete?: InputMaybe<Scalars['String']>;
   status_review?: InputMaybe<Scalars['String']>;
   story_x?: InputMaybe<Scalars['String']>;
+  subber?: InputMaybe<Scalars['String']>;
   subitem?: InputMaybe<Scalars['String']>;
   subitem_of_x?: InputMaybe<Scalars['String']>;
   subscribers?: InputMaybe<Scalars['String']>;
@@ -5981,10 +6081,10 @@ export type WebsiteInterfaceInput = {
   textual?: InputMaybe<Scalars['String']>;
   theme?: InputMaybe<Scalars['String']>;
   thickness?: InputMaybe<Scalars['String']>;
-  transcribers?: InputMaybe<Scalars['String']>;
+  transcriber?: InputMaybe<Scalars['String']>;
   transcript_notice?: InputMaybe<Scalars['String']>;
   translation_notice?: InputMaybe<Scalars['String']>;
-  translators?: InputMaybe<Scalars['String']>;
+  translator?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<Scalars['String']>;
   type_information?: InputMaybe<Scalars['String']>;
   typesetters?: InputMaybe<Scalars['String']>;
@@ -5994,6 +6094,7 @@ export type WebsiteInterfaceInput = {
   video?: InputMaybe<Scalars['String']>;
   videos?: InputMaybe<Scalars['String']>;
   view_on?: InputMaybe<Scalars['String']>;
+  view_on_x?: InputMaybe<Scalars['String']>;
   view_scans?: InputMaybe<Scalars['String']>;
   want_it?: InputMaybe<Scalars['String']>;
   watch_content?: InputMaybe<Scalars['String']>;
@@ -6157,53 +6258,53 @@ export type WikiPagesTagRelationResponseCollection = {
   data: Array<WikiPagesTagEntity>;
 };
 
-export type ContentAttributesFragment = { __typename?: 'Content', slug: string, updatedAt?: any | null, translations?: Array<{ __typename?: 'ComponentTranslationsTitle', pre_title?: string | null, title: string, subtitle?: string | null, description?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null, text_set?: { __typename?: 'ComponentSetsTextSet', text?: string | null } | null } | null> | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', name: string, short: string } | null }> } | null, type?: { __typename?: 'ContentTypeEntityResponse', data?: { __typename?: 'ContentTypeEntity', attributes?: { __typename?: 'ContentType', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null };
+export type ContentAttributesFragment = { __typename?: 'Content', slug: string, updatedAt?: any | null, translations?: Array<{ __typename?: 'ComponentTranslationsTitle', pre_title?: string | null, title: string, subtitle?: string | null, description?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null, text_set?: { __typename?: 'ComponentSetsTextSet', text?: string | null } | null } | null> | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, type?: { __typename?: 'ContentTypeEntityResponse', data?: { __typename?: 'ContentTypeEntity', attributes?: { __typename?: 'ContentType', slug: string } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null };
 
-export type LibraryItemAttributesFragment = { __typename?: 'LibraryItem', title: string, subtitle?: string | null, slug: string, root_item: boolean, primary: boolean, descriptions?: Array<{ __typename?: 'ComponentTranslationsLibraryItems', description: string, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, release_date?: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null } | null, price?: { __typename?: 'ComponentBasicsPrice', amount?: number | null, currency?: { __typename?: 'CurrencyEntityResponse', data?: { __typename?: 'CurrencyEntity', attributes?: { __typename?: 'Currency', symbol: string, code: string, rate_to_usd: number } | null } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', name: string, short: string } | null }> } | null, metadata?: Array<{ __typename: 'ComponentMetadataAudio', subtype?: { __typename?: 'AudioSubtypeEntityResponse', data?: { __typename?: 'AudioSubtypeEntity', attributes?: { __typename?: 'AudioSubtype', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null } | { __typename: 'ComponentMetadataBooks', subtype?: { __typename?: 'TextualSubtypeEntityResponse', data?: { __typename?: 'TextualSubtypeEntity', attributes?: { __typename?: 'TextualSubtype', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null } | { __typename: 'ComponentMetadataGame', platforms?: { __typename?: 'GamePlatformRelationResponseCollection', data: Array<{ __typename?: 'GamePlatformEntity', id?: string | null, attributes?: { __typename?: 'GamePlatform', short: string } | null }> } | null } | { __typename: 'ComponentMetadataGroup', subtype?: { __typename?: 'GroupSubtypeEntityResponse', data?: { __typename?: 'GroupSubtypeEntity', attributes?: { __typename?: 'GroupSubtype', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null, subitems_type?: { __typename?: 'MetadataTypeEntityResponse', data?: { __typename?: 'MetadataTypeEntity', attributes?: { __typename?: 'MetadataType', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null } | { __typename: 'ComponentMetadataOther' } | { __typename: 'ComponentMetadataVideo', subtype?: { __typename?: 'VideoSubtypeEntityResponse', data?: { __typename?: 'VideoSubtypeEntity', attributes?: { __typename?: 'VideoSubtype', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null } | { __typename: 'Error' } | null> | null };
+export type LibraryItemAttributesFragment = { __typename?: 'LibraryItem', title: string, subtitle?: string | null, slug: string, root_item: boolean, primary: boolean, descriptions?: Array<{ __typename?: 'ComponentTranslationsLibraryItems', description: string, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, release_date?: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null } | null, price?: { __typename?: 'ComponentBasicsPrice', amount?: number | null, currency?: { __typename?: 'CurrencyEntityResponse', data?: { __typename?: 'CurrencyEntity', attributes?: { __typename?: 'Currency', symbol: string, code: string, rate_to_usd: number } | null } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, metadata?: Array<{ __typename: 'ComponentMetadataAudio', subtype?: { __typename?: 'AudioSubtypeEntityResponse', data?: { __typename?: 'AudioSubtypeEntity', attributes?: { __typename?: 'AudioSubtype', slug: string } | null } | null } | null } | { __typename: 'ComponentMetadataBooks', subtype?: { __typename?: 'TextualSubtypeEntityResponse', data?: { __typename?: 'TextualSubtypeEntity', attributes?: { __typename?: 'TextualSubtype', slug: string } | null } | null } | null } | { __typename: 'ComponentMetadataGame', platform?: { __typename?: 'GamePlatformEntityResponse', data?: { __typename?: 'GamePlatformEntity', attributes?: { __typename?: 'GamePlatform', slug: string } | null } | null } | null } | { __typename: 'ComponentMetadataGroup', subtype?: { __typename?: 'GroupSubtypeEntityResponse', data?: { __typename?: 'GroupSubtypeEntity', attributes?: { __typename?: 'GroupSubtype', slug: string } | null } | null } | null, subitems_type?: { __typename?: 'MetadataTypeEntityResponse', data?: { __typename?: 'MetadataTypeEntity', attributes?: { __typename?: 'MetadataType', slug: string } | null } | null } | null } | { __typename: 'ComponentMetadataOther' } | { __typename: 'ComponentMetadataVideo', subtype?: { __typename?: 'VideoSubtypeEntityResponse', data?: { __typename?: 'VideoSubtypeEntity', attributes?: { __typename?: 'VideoSubtype', slug: string } | null } | null } | null } | { __typename: 'Error' } | null> | null };
 
-export type PostAttributesFragment = { __typename?: 'Post', slug: string, hidden: boolean, date: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null }, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', short: string } | null }> } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, translations?: Array<{ __typename?: 'ComponentTranslationsPosts', title: string, excerpt?: string | null, body?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null } | null> | null };
+export type PostAttributesFragment = { __typename?: 'Post', slug: string, hidden: boolean, date: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null }, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, translations?: Array<{ __typename?: 'ComponentTranslationsPosts', title: string, excerpt?: string | null, body?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null } | null> | null };
 
 export type VideoAttributesFragment = { __typename?: 'Video', uid: string, title: string, description: string, views: number, gone: boolean, duration: number, published_date: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null }, channel?: { __typename?: 'VideoChannelEntityResponse', data?: { __typename?: 'VideoChannelEntity', attributes?: { __typename?: 'VideoChannel', title: string, uid: string } | null } | null } | null };
 
-export type WeaponAttributesFragment = { __typename?: 'WeaponStory', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, type?: { __typename?: 'WeaponStoryTypeEntityResponse', data?: { __typename?: 'WeaponStoryTypeEntity', id?: string | null, attributes?: { __typename?: 'WeaponStoryType', slug: string, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryType', name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null } | null } | null, name?: Array<{ __typename?: 'ComponentTranslationsWeaponStory', id: string, name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, stories?: Array<{ __typename?: 'ComponentCollectionsComponentWeaponStory', id: string, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', short: string } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryStory', description?: string | null, level_1?: string | null, level_2?: string | null, level_3?: string | null, level_4?: string | null, status: Enum_Componenttranslationsweaponstorystory_Status, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null };
+export type WeaponAttributesFragment = { __typename?: 'WeaponStory', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, type?: { __typename?: 'WeaponStoryTypeEntityResponse', data?: { __typename?: 'WeaponStoryTypeEntity', attributes?: { __typename?: 'WeaponStoryType', slug: string } | null } | null } | null, name?: Array<{ __typename?: 'ComponentTranslationsWeaponStory', id: string, name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, stories?: Array<{ __typename?: 'ComponentCollectionsComponentWeaponStory', id: string, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryStory', description?: string | null, level_1?: string | null, level_2?: string | null, level_3?: string | null, level_4?: string | null, status: Enum_Componenttranslationsweaponstorystory_Status, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null };
 
-export type WikiPageAttributesFragment = { __typename?: 'WikiPage', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', name: string, short: string } | null }> } | null, definitions?: Array<{ __typename?: 'ComponentWikiSpecializationGlossaryItem', translations?: Array<{ __typename?: 'ComponentTranslationsGlossaryDefinition', definition?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null, tags?: { __typename?: 'WikiPagesTagRelationResponseCollection', data: Array<{ __typename?: 'WikiPagesTagEntity', id?: string | null, attributes?: { __typename?: 'WikiPagesTag', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWiki', title: string, summary?: string | null, aliases?: Array<{ __typename?: 'ComponentCollectionsComponentAliases', alias: string } | null> | null, body?: { __typename?: 'ComponentCollectionsComponentBody', body: string } | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null };
+export type WikiPageAttributesFragment = { __typename?: 'WikiPage', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, definitions?: Array<{ __typename?: 'ComponentWikiSpecializationGlossaryItem', translations?: Array<{ __typename?: 'ComponentTranslationsGlossaryDefinition', definition?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null, tags?: { __typename?: 'WikiPagesTagRelationResponseCollection', data: Array<{ __typename?: 'WikiPagesTagEntity', attributes?: { __typename?: 'WikiPagesTag', slug: string } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWiki', title: string, summary?: string | null, aliases?: Array<{ __typename?: 'ComponentCollectionsComponentAliases', alias: string } | null> | null, body?: { __typename?: 'ComponentCollectionsComponentBody', body: string } | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null };
 
 export type GetContentQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type GetContentQuery = { __typename?: 'Query', content?: { __typename?: 'ContentEntityResponse', data?: { __typename?: 'ContentEntity', id?: string | null, attributes?: { __typename?: 'Content', slug: string, updatedAt?: any | null, translations?: Array<{ __typename?: 'ComponentTranslationsTitle', pre_title?: string | null, title: string, subtitle?: string | null, description?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null, text_set?: { __typename?: 'ComponentSetsTextSet', text?: string | null } | null } | null> | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', name: string, short: string } | null }> } | null, type?: { __typename?: 'ContentTypeEntityResponse', data?: { __typename?: 'ContentTypeEntity', attributes?: { __typename?: 'ContentType', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null } | null } | null } | null };
+export type GetContentQuery = { __typename?: 'Query', content?: { __typename?: 'ContentEntityResponse', data?: { __typename?: 'ContentEntity', id?: string | null, attributes?: { __typename?: 'Content', slug: string, updatedAt?: any | null, translations?: Array<{ __typename?: 'ComponentTranslationsTitle', pre_title?: string | null, title: string, subtitle?: string | null, description?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null, text_set?: { __typename?: 'ComponentSetsTextSet', text?: string | null } | null } | null> | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, type?: { __typename?: 'ContentTypeEntityResponse', data?: { __typename?: 'ContentTypeEntity', attributes?: { __typename?: 'ContentType', slug: string } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null } | null } | null } | null };
 
 export type GetContentsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetContentsQuery = { __typename?: 'Query', contents?: { __typename?: 'ContentEntityResponseCollection', data: Array<{ __typename?: 'ContentEntity', id?: string | null, attributes?: { __typename?: 'Content', slug: string, updatedAt?: any | null, translations?: Array<{ __typename?: 'ComponentTranslationsTitle', pre_title?: string | null, title: string, subtitle?: string | null, description?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null, text_set?: { __typename?: 'ComponentSetsTextSet', text?: string | null } | null } | null> | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', name: string, short: string } | null }> } | null, type?: { __typename?: 'ContentTypeEntityResponse', data?: { __typename?: 'ContentTypeEntity', attributes?: { __typename?: 'ContentType', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null } | null }> } | null };
+export type GetContentsQuery = { __typename?: 'Query', contents?: { __typename?: 'ContentEntityResponseCollection', data: Array<{ __typename?: 'ContentEntity', id?: string | null, attributes?: { __typename?: 'Content', slug: string, updatedAt?: any | null, translations?: Array<{ __typename?: 'ComponentTranslationsTitle', pre_title?: string | null, title: string, subtitle?: string | null, description?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null, text_set?: { __typename?: 'ComponentSetsTextSet', text?: string | null } | null } | null> | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, type?: { __typename?: 'ContentTypeEntityResponse', data?: { __typename?: 'ContentTypeEntity', attributes?: { __typename?: 'ContentType', slug: string } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null } | null }> } | null };
 
 export type GetLibraryItemQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type GetLibraryItemQuery = { __typename?: 'Query', libraryItem?: { __typename?: 'LibraryItemEntityResponse', data?: { __typename?: 'LibraryItemEntity', id?: string | null, attributes?: { __typename?: 'LibraryItem', title: string, subtitle?: string | null, slug: string, root_item: boolean, primary: boolean, descriptions?: Array<{ __typename?: 'ComponentTranslationsLibraryItems', description: string, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, release_date?: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null } | null, price?: { __typename?: 'ComponentBasicsPrice', amount?: number | null, currency?: { __typename?: 'CurrencyEntityResponse', data?: { __typename?: 'CurrencyEntity', attributes?: { __typename?: 'Currency', symbol: string, code: string, rate_to_usd: number } | null } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', name: string, short: string } | null }> } | null, metadata?: Array<{ __typename: 'ComponentMetadataAudio', subtype?: { __typename?: 'AudioSubtypeEntityResponse', data?: { __typename?: 'AudioSubtypeEntity', attributes?: { __typename?: 'AudioSubtype', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null } | { __typename: 'ComponentMetadataBooks', subtype?: { __typename?: 'TextualSubtypeEntityResponse', data?: { __typename?: 'TextualSubtypeEntity', attributes?: { __typename?: 'TextualSubtype', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null } | { __typename: 'ComponentMetadataGame', platforms?: { __typename?: 'GamePlatformRelationResponseCollection', data: Array<{ __typename?: 'GamePlatformEntity', id?: string | null, attributes?: { __typename?: 'GamePlatform', short: string } | null }> } | null } | { __typename: 'ComponentMetadataGroup', subtype?: { __typename?: 'GroupSubtypeEntityResponse', data?: { __typename?: 'GroupSubtypeEntity', attributes?: { __typename?: 'GroupSubtype', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null, subitems_type?: { __typename?: 'MetadataTypeEntityResponse', data?: { __typename?: 'MetadataTypeEntity', attributes?: { __typename?: 'MetadataType', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null } | { __typename: 'ComponentMetadataOther' } | { __typename: 'ComponentMetadataVideo', subtype?: { __typename?: 'VideoSubtypeEntityResponse', data?: { __typename?: 'VideoSubtypeEntity', attributes?: { __typename?: 'VideoSubtype', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null } | { __typename: 'Error' } | null> | null } | null } | null } | null };
+export type GetLibraryItemQuery = { __typename?: 'Query', libraryItem?: { __typename?: 'LibraryItemEntityResponse', data?: { __typename?: 'LibraryItemEntity', id?: string | null, attributes?: { __typename?: 'LibraryItem', title: string, subtitle?: string | null, slug: string, root_item: boolean, primary: boolean, descriptions?: Array<{ __typename?: 'ComponentTranslationsLibraryItems', description: string, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, release_date?: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null } | null, price?: { __typename?: 'ComponentBasicsPrice', amount?: number | null, currency?: { __typename?: 'CurrencyEntityResponse', data?: { __typename?: 'CurrencyEntity', attributes?: { __typename?: 'Currency', symbol: string, code: string, rate_to_usd: number } | null } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, metadata?: Array<{ __typename: 'ComponentMetadataAudio', subtype?: { __typename?: 'AudioSubtypeEntityResponse', data?: { __typename?: 'AudioSubtypeEntity', attributes?: { __typename?: 'AudioSubtype', slug: string } | null } | null } | null } | { __typename: 'ComponentMetadataBooks', subtype?: { __typename?: 'TextualSubtypeEntityResponse', data?: { __typename?: 'TextualSubtypeEntity', attributes?: { __typename?: 'TextualSubtype', slug: string } | null } | null } | null } | { __typename: 'ComponentMetadataGame', platform?: { __typename?: 'GamePlatformEntityResponse', data?: { __typename?: 'GamePlatformEntity', attributes?: { __typename?: 'GamePlatform', slug: string } | null } | null } | null } | { __typename: 'ComponentMetadataGroup', subtype?: { __typename?: 'GroupSubtypeEntityResponse', data?: { __typename?: 'GroupSubtypeEntity', attributes?: { __typename?: 'GroupSubtype', slug: string } | null } | null } | null, subitems_type?: { __typename?: 'MetadataTypeEntityResponse', data?: { __typename?: 'MetadataTypeEntity', attributes?: { __typename?: 'MetadataType', slug: string } | null } | null } | null } | { __typename: 'ComponentMetadataOther' } | { __typename: 'ComponentMetadataVideo', subtype?: { __typename?: 'VideoSubtypeEntityResponse', data?: { __typename?: 'VideoSubtypeEntity', attributes?: { __typename?: 'VideoSubtype', slug: string } | null } | null } | null } | { __typename: 'Error' } | null> | null } | null } | null } | null };
 
 export type GetLibraryItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetLibraryItemsQuery = { __typename?: 'Query', libraryItems?: { __typename?: 'LibraryItemEntityResponseCollection', data: Array<{ __typename?: 'LibraryItemEntity', id?: string | null, attributes?: { __typename?: 'LibraryItem', title: string, subtitle?: string | null, slug: string, root_item: boolean, primary: boolean, descriptions?: Array<{ __typename?: 'ComponentTranslationsLibraryItems', description: string, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, release_date?: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null } | null, price?: { __typename?: 'ComponentBasicsPrice', amount?: number | null, currency?: { __typename?: 'CurrencyEntityResponse', data?: { __typename?: 'CurrencyEntity', attributes?: { __typename?: 'Currency', symbol: string, code: string, rate_to_usd: number } | null } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', name: string, short: string } | null }> } | null, metadata?: Array<{ __typename: 'ComponentMetadataAudio', subtype?: { __typename?: 'AudioSubtypeEntityResponse', data?: { __typename?: 'AudioSubtypeEntity', attributes?: { __typename?: 'AudioSubtype', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null } | { __typename: 'ComponentMetadataBooks', subtype?: { __typename?: 'TextualSubtypeEntityResponse', data?: { __typename?: 'TextualSubtypeEntity', attributes?: { __typename?: 'TextualSubtype', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null } | { __typename: 'ComponentMetadataGame', platforms?: { __typename?: 'GamePlatformRelationResponseCollection', data: Array<{ __typename?: 'GamePlatformEntity', id?: string | null, attributes?: { __typename?: 'GamePlatform', short: string } | null }> } | null } | { __typename: 'ComponentMetadataGroup', subtype?: { __typename?: 'GroupSubtypeEntityResponse', data?: { __typename?: 'GroupSubtypeEntity', attributes?: { __typename?: 'GroupSubtype', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null, subitems_type?: { __typename?: 'MetadataTypeEntityResponse', data?: { __typename?: 'MetadataTypeEntity', attributes?: { __typename?: 'MetadataType', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null } | { __typename: 'ComponentMetadataOther' } | { __typename: 'ComponentMetadataVideo', subtype?: { __typename?: 'VideoSubtypeEntityResponse', data?: { __typename?: 'VideoSubtypeEntity', attributes?: { __typename?: 'VideoSubtype', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string } | null> | null } | null } | null } | null } | { __typename: 'Error' } | null> | null } | null }> } | null };
+export type GetLibraryItemsQuery = { __typename?: 'Query', libraryItems?: { __typename?: 'LibraryItemEntityResponseCollection', data: Array<{ __typename?: 'LibraryItemEntity', id?: string | null, attributes?: { __typename?: 'LibraryItem', title: string, subtitle?: string | null, slug: string, root_item: boolean, primary: boolean, descriptions?: Array<{ __typename?: 'ComponentTranslationsLibraryItems', description: string, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, release_date?: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null } | null, price?: { __typename?: 'ComponentBasicsPrice', amount?: number | null, currency?: { __typename?: 'CurrencyEntityResponse', data?: { __typename?: 'CurrencyEntity', attributes?: { __typename?: 'Currency', symbol: string, code: string, rate_to_usd: number } | null } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, metadata?: Array<{ __typename: 'ComponentMetadataAudio', subtype?: { __typename?: 'AudioSubtypeEntityResponse', data?: { __typename?: 'AudioSubtypeEntity', attributes?: { __typename?: 'AudioSubtype', slug: string } | null } | null } | null } | { __typename: 'ComponentMetadataBooks', subtype?: { __typename?: 'TextualSubtypeEntityResponse', data?: { __typename?: 'TextualSubtypeEntity', attributes?: { __typename?: 'TextualSubtype', slug: string } | null } | null } | null } | { __typename: 'ComponentMetadataGame', platform?: { __typename?: 'GamePlatformEntityResponse', data?: { __typename?: 'GamePlatformEntity', attributes?: { __typename?: 'GamePlatform', slug: string } | null } | null } | null } | { __typename: 'ComponentMetadataGroup', subtype?: { __typename?: 'GroupSubtypeEntityResponse', data?: { __typename?: 'GroupSubtypeEntity', attributes?: { __typename?: 'GroupSubtype', slug: string } | null } | null } | null, subitems_type?: { __typename?: 'MetadataTypeEntityResponse', data?: { __typename?: 'MetadataTypeEntity', attributes?: { __typename?: 'MetadataType', slug: string } | null } | null } | null } | { __typename: 'ComponentMetadataOther' } | { __typename: 'ComponentMetadataVideo', subtype?: { __typename?: 'VideoSubtypeEntityResponse', data?: { __typename?: 'VideoSubtypeEntity', attributes?: { __typename?: 'VideoSubtype', slug: string } | null } | null } | null } | { __typename: 'Error' } | null> | null } | null }> } | null };
 
 export type GetPostQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type GetPostQuery = { __typename?: 'Query', post?: { __typename?: 'PostEntityResponse', data?: { __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', slug: string, hidden: boolean, date: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null }, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', short: string } | null }> } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, translations?: Array<{ __typename?: 'ComponentTranslationsPosts', title: string, excerpt?: string | null, body?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null } | null> | null } | null } | null } | null };
+export type GetPostQuery = { __typename?: 'Query', post?: { __typename?: 'PostEntityResponse', data?: { __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', slug: string, hidden: boolean, date: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null }, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, translations?: Array<{ __typename?: 'ComponentTranslationsPosts', title: string, excerpt?: string | null, body?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null } | null> | null } | null } | null } | null };
 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', slug: string, hidden: boolean, date: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null }, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', short: string } | null }> } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, translations?: Array<{ __typename?: 'ComponentTranslationsPosts', title: string, excerpt?: string | null, body?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null } | null> | null } | null }> } | null };
+export type GetPostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', slug: string, hidden: boolean, date: { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null }, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, translations?: Array<{ __typename?: 'ComponentTranslationsPosts', title: string, excerpt?: string | null, body?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null } | null> | null } | null }> } | null };
 
 export type GetVideoQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
@@ -6222,24 +6323,24 @@ export type GetWeaponQueryVariables = Exact<{
 }>;
 
 
-export type GetWeaponQuery = { __typename?: 'Query', weaponStory?: { __typename?: 'WeaponStoryEntityResponse', data?: { __typename?: 'WeaponStoryEntity', id?: string | null, attributes?: { __typename?: 'WeaponStory', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, type?: { __typename?: 'WeaponStoryTypeEntityResponse', data?: { __typename?: 'WeaponStoryTypeEntity', id?: string | null, attributes?: { __typename?: 'WeaponStoryType', slug: string, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryType', name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null } | null } | null, name?: Array<{ __typename?: 'ComponentTranslationsWeaponStory', id: string, name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, stories?: Array<{ __typename?: 'ComponentCollectionsComponentWeaponStory', id: string, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', short: string } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryStory', description?: string | null, level_1?: string | null, level_2?: string | null, level_3?: string | null, level_4?: string | null, status: Enum_Componenttranslationsweaponstorystory_Status, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null } | null } | null } | null };
+export type GetWeaponQuery = { __typename?: 'Query', weaponStory?: { __typename?: 'WeaponStoryEntityResponse', data?: { __typename?: 'WeaponStoryEntity', id?: string | null, attributes?: { __typename?: 'WeaponStory', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, type?: { __typename?: 'WeaponStoryTypeEntityResponse', data?: { __typename?: 'WeaponStoryTypeEntity', attributes?: { __typename?: 'WeaponStoryType', slug: string } | null } | null } | null, name?: Array<{ __typename?: 'ComponentTranslationsWeaponStory', id: string, name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, stories?: Array<{ __typename?: 'ComponentCollectionsComponentWeaponStory', id: string, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryStory', description?: string | null, level_1?: string | null, level_2?: string | null, level_3?: string | null, level_4?: string | null, status: Enum_Componenttranslationsweaponstorystory_Status, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null } | null } | null } | null };
 
 export type GetWeaponsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetWeaponsQuery = { __typename?: 'Query', weaponStories?: { __typename?: 'WeaponStoryEntityResponseCollection', data: Array<{ __typename?: 'WeaponStoryEntity', id?: string | null, attributes?: { __typename?: 'WeaponStory', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, type?: { __typename?: 'WeaponStoryTypeEntityResponse', data?: { __typename?: 'WeaponStoryTypeEntity', id?: string | null, attributes?: { __typename?: 'WeaponStoryType', slug: string, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryType', name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null } | null } | null, name?: Array<{ __typename?: 'ComponentTranslationsWeaponStory', id: string, name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, stories?: Array<{ __typename?: 'ComponentCollectionsComponentWeaponStory', id: string, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', short: string } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryStory', description?: string | null, level_1?: string | null, level_2?: string | null, level_3?: string | null, level_4?: string | null, status: Enum_Componenttranslationsweaponstorystory_Status, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null } | null }> } | null };
+export type GetWeaponsQuery = { __typename?: 'Query', weaponStories?: { __typename?: 'WeaponStoryEntityResponseCollection', data: Array<{ __typename?: 'WeaponStoryEntity', id?: string | null, attributes?: { __typename?: 'WeaponStory', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, type?: { __typename?: 'WeaponStoryTypeEntityResponse', data?: { __typename?: 'WeaponStoryTypeEntity', attributes?: { __typename?: 'WeaponStoryType', slug: string } | null } | null } | null, name?: Array<{ __typename?: 'ComponentTranslationsWeaponStory', id: string, name?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null, stories?: Array<{ __typename?: 'ComponentCollectionsComponentWeaponStory', id: string, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWeaponStoryStory', description?: string | null, level_1?: string | null, level_2?: string | null, level_3?: string | null, level_4?: string | null, status: Enum_Componenttranslationsweaponstorystory_Status, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null } | null }> } | null };
 
 export type GetWikiPageQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type GetWikiPageQuery = { __typename?: 'Query', wikiPage?: { __typename?: 'WikiPageEntityResponse', data?: { __typename?: 'WikiPageEntity', id?: string | null, attributes?: { __typename?: 'WikiPage', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', name: string, short: string } | null }> } | null, definitions?: Array<{ __typename?: 'ComponentWikiSpecializationGlossaryItem', translations?: Array<{ __typename?: 'ComponentTranslationsGlossaryDefinition', definition?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null, tags?: { __typename?: 'WikiPagesTagRelationResponseCollection', data: Array<{ __typename?: 'WikiPagesTagEntity', id?: string | null, attributes?: { __typename?: 'WikiPagesTag', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWiki', title: string, summary?: string | null, aliases?: Array<{ __typename?: 'ComponentCollectionsComponentAliases', alias: string } | null> | null, body?: { __typename?: 'ComponentCollectionsComponentBody', body: string } | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null } | null } | null };
+export type GetWikiPageQuery = { __typename?: 'Query', wikiPage?: { __typename?: 'WikiPageEntityResponse', data?: { __typename?: 'WikiPageEntity', id?: string | null, attributes?: { __typename?: 'WikiPage', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, definitions?: Array<{ __typename?: 'ComponentWikiSpecializationGlossaryItem', translations?: Array<{ __typename?: 'ComponentTranslationsGlossaryDefinition', definition?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null, tags?: { __typename?: 'WikiPagesTagRelationResponseCollection', data: Array<{ __typename?: 'WikiPagesTagEntity', attributes?: { __typename?: 'WikiPagesTag', slug: string } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWiki', title: string, summary?: string | null, aliases?: Array<{ __typename?: 'ComponentCollectionsComponentAliases', alias: string } | null> | null, body?: { __typename?: 'ComponentCollectionsComponentBody', body: string } | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null } | null } | null };
 
 export type GetWikiPagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetWikiPagesQuery = { __typename?: 'Query', wikiPages?: { __typename?: 'WikiPageEntityResponseCollection', data: Array<{ __typename?: 'WikiPageEntity', id?: string | null, attributes?: { __typename?: 'WikiPage', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', name: string, short: string } | null }> } | null, definitions?: Array<{ __typename?: 'ComponentWikiSpecializationGlossaryItem', translations?: Array<{ __typename?: 'ComponentTranslationsGlossaryDefinition', definition?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null, tags?: { __typename?: 'WikiPagesTagRelationResponseCollection', data: Array<{ __typename?: 'WikiPagesTagEntity', id?: string | null, attributes?: { __typename?: 'WikiPagesTag', slug: string, titles?: Array<{ __typename?: 'ComponentTranslationsSimpleTitle', title: string, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWiki', title: string, summary?: string | null, aliases?: Array<{ __typename?: 'ComponentCollectionsComponentAliases', alias: string } | null> | null, body?: { __typename?: 'ComponentCollectionsComponentBody', body: string } | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null }> } | null };
+export type GetWikiPagesQuery = { __typename?: 'Query', wikiPages?: { __typename?: 'WikiPageEntityResponseCollection', data: Array<{ __typename?: 'WikiPageEntity', id?: string | null, attributes?: { __typename?: 'WikiPage', slug: string, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, caption?: string | null, width?: number | null, height?: number | null, url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', slug: string } | null }> } | null, definitions?: Array<{ __typename?: 'ComponentWikiSpecializationGlossaryItem', translations?: Array<{ __typename?: 'ComponentTranslationsGlossaryDefinition', definition?: string | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null> | null, tags?: { __typename?: 'WikiPagesTagRelationResponseCollection', data: Array<{ __typename?: 'WikiPagesTagEntity', attributes?: { __typename?: 'WikiPagesTag', slug: string } | null }> } | null, translations?: Array<{ __typename?: 'ComponentTranslationsWiki', title: string, summary?: string | null, aliases?: Array<{ __typename?: 'ComponentCollectionsComponentAliases', alias: string } | null> | null, body?: { __typename?: 'ComponentCollectionsComponentBody', body: string } | null, language?: { __typename?: 'LanguageEntityResponse', data?: { __typename?: 'LanguageEntity', attributes?: { __typename?: 'Language', code: string } | null } | null } | null } | null> | null } | null }> } | null };
 
 export type DatePickerFragment = { __typename?: 'ComponentBasicsDatepicker', year?: number | null, month?: number | null, day?: number | null };
 
@@ -6279,10 +6380,8 @@ export const ContentAttributesFragmentDoc = gql`
   }
   categories(pagination: {limit: -1}) {
     data {
-      id
       attributes {
-        name
-        short
+        slug
       }
     }
   }
@@ -6290,9 +6389,6 @@ export const ContentAttributesFragmentDoc = gql`
     data {
       attributes {
         slug
-        titles(filters: {language: {code: {eq: "en"}}}) {
-          title
-        }
       }
     }
   }
@@ -6358,10 +6454,8 @@ export const LibraryItemAttributesFragmentDoc = gql`
   }
   categories(pagination: {limit: -1}) {
     data {
-      id
       attributes {
-        name
-        short
+        slug
       }
     }
   }
@@ -6372,19 +6466,15 @@ export const LibraryItemAttributesFragmentDoc = gql`
         data {
           attributes {
             slug
-            titles(filters: {language: {code: {eq: "en"}}}) {
-              title
-            }
           }
         }
       }
     }
     ... on ComponentMetadataGame {
-      platforms(pagination: {limit: -1}) {
+      platform {
         data {
-          id
           attributes {
-            short
+            slug
           }
         }
       }
@@ -6394,9 +6484,6 @@ export const LibraryItemAttributesFragmentDoc = gql`
         data {
           attributes {
             slug
-            titles(filters: {language: {code: {eq: "en"}}}) {
-              title
-            }
           }
         }
       }
@@ -6406,9 +6493,6 @@ export const LibraryItemAttributesFragmentDoc = gql`
         data {
           attributes {
             slug
-            titles(filters: {language: {code: {eq: "en"}}}) {
-              title
-            }
           }
         }
       }
@@ -6418,9 +6502,6 @@ export const LibraryItemAttributesFragmentDoc = gql`
         data {
           attributes {
             slug
-            titles(filters: {language: {code: {eq: "en"}}}) {
-              title
-            }
           }
         }
       }
@@ -6428,9 +6509,6 @@ export const LibraryItemAttributesFragmentDoc = gql`
         data {
           attributes {
             slug
-            titles(filters: {language: {code: {eq: "en"}}}) {
-              title
-            }
           }
         }
       }
@@ -6449,9 +6527,8 @@ export const PostAttributesFragmentDoc = gql`
   }
   categories(pagination: {limit: -1}) {
     data {
-      id
       attributes {
-        short
+        slug
       }
     }
   }
@@ -6518,19 +6595,8 @@ export const WeaponAttributesFragmentDoc = gql`
   }
   type {
     data {
-      id
       attributes {
         slug
-        translations(filters: {language: {code: {eq: "en"}}}) {
-          name
-          language {
-            data {
-              attributes {
-                code
-              }
-            }
-          }
-        }
       }
     }
   }
@@ -6550,9 +6616,8 @@ export const WeaponAttributesFragmentDoc = gql`
     id
     categories(pagination: {limit: -1}) {
       data {
-        id
         attributes {
-          short
+          slug
         }
       }
     }
@@ -6586,10 +6651,8 @@ export const WikiPageAttributesFragmentDoc = gql`
   }
   categories(pagination: {limit: -1}) {
     data {
-      id
       attributes {
-        name
-        short
+        slug
       }
     }
   }
@@ -6607,19 +6670,8 @@ export const WikiPageAttributesFragmentDoc = gql`
   }
   tags(pagination: {limit: -1}) {
     data {
-      id
       attributes {
         slug
-        titles(filters: {language: {code: {eq: "en"}}}) {
-          language {
-            data {
-              attributes {
-                code
-              }
-            }
-          }
-          title
-        }
       }
     }
   }

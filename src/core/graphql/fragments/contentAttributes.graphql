@@ -19,10 +19,8 @@ fragment contentAttributes on Content {
   }
   categories(pagination: { limit: -1 }) {
     data {
-      id
       attributes {
-        name
-        short
+        slug
       }
     }
   }
@@ -30,9 +28,6 @@ fragment contentAttributes on Content {
     data {
       attributes {
         slug
-        titles(filters: { language: { code: { eq: "en" } } }) {
-          title
-        }
       }
     }
   }

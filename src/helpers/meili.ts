@@ -76,9 +76,9 @@ const transformLibraryItem: TransformFunction<MeiliIndices.LIBRARY_ITEM> = (data
       attributes.price?.currency?.data?.attributes && isDefined(attributes.price.amount)
         ? attributes.price.amount * attributes.price.currency.data.attributes.rate_to_usd
         : undefined,
-    filterable_categories: filterHasAttributes(attributes.categories?.data, [
-      "attributes.short",
-    ] as const).map((category) => category.attributes.short),
+    filterable_categories: filterHasAttributes(attributes.categories?.data, ["attributes"]).map(
+      (category) => category.attributes.slug
+    ),
     untangible_group_item: isUntangibleGroupItem(attributes.metadata?.[0]),
     ...attributes,
   };
@@ -158,8 +158,8 @@ const transformWeapon: TransformFunction<MeiliIndices.WEAPON> = (data) => {
   const categories = new Map<string, MeiliWeapon["categories"][number]>();
 
   stories?.forEach((story) => {
-    filterHasAttributes(story?.categories?.data, ["id"] as const).forEach((category) => {
-      categories.set(category.id, category);
+    filterHasAttributes(story?.categories?.data, ["attributes"]).forEach((category) => {
+      categories.set(category.attributes.slug, category);
     });
   });
 

@@ -6,9 +6,8 @@ fragment postAttributes on Post {
   }
   categories(pagination: { limit: -1 }) {
     data {
-      id
       attributes {
-        short
+        slug
       }
     }
   }

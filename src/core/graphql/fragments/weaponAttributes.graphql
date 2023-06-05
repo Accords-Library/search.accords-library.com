@@ -8,19 +8,8 @@ fragment weaponAttributes on WeaponStory {
   }
   type {
     data {
-      id
       attributes {
         slug
-        translations(filters: { language: { code: { eq: "en" } } }) {
-          name
-          language {
-            data {
-              attributes {
-                code
-              }
-            }
-          }
-        }
       }
     }
   }
@@ -40,9 +29,8 @@ fragment weaponAttributes on WeaponStory {
     id
     categories(pagination: { limit: -1 }) {
       data {
-        id
         attributes {
-          short
+          slug
         }
       }
     }

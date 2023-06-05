@@ -29,10 +29,8 @@ fragment libraryItemAttributes on LibraryItem {
   }
   categories(pagination: { limit: -1 }) {
     data {
-      id
       attributes {
-        name
-        short
+        slug
       }
     }
   }
@@ -43,19 +41,15 @@ fragment libraryItemAttributes on LibraryItem {
         data {
           attributes {
             slug
-            titles(filters: { language: { code: { eq: "en" } } }) {
-              title
-            }
           }
         }
       }
     }
     ... on ComponentMetadataGame {
-      platforms(pagination: { limit: -1 }) {
+      platform {
         data {
-          id
           attributes {
-            short
+            slug
           }
         }
       }
@@ -65,9 +59,6 @@ fragment libraryItemAttributes on LibraryItem {
         data {
           attributes {
             slug
-            titles(filters: { language: { code: { eq: "en" } } }) {
-              title
-            }
           }
         }
       }
@@ -77,9 +68,6 @@ fragment libraryItemAttributes on LibraryItem {
         data {
           attributes {
             slug
-            titles(filters: { language: { code: { eq: "en" } } }) {
-              title
-            }
           }
         }
       }
@@ -89,9 +77,6 @@ fragment libraryItemAttributes on LibraryItem {
         data {
           attributes {
             slug
-            titles(filters: { language: { code: { eq: "en" } } }) {
-              title
-            }
           }
         }
       }
@@ -99,9 +84,6 @@ fragment libraryItemAttributes on LibraryItem {
         data {
           attributes {
             slug
-            titles(filters: { language: { code: { eq: "en" } } }) {
-              title
-            }
           }
         }
       }

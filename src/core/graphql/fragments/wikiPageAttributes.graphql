@@ -9,10 +9,8 @@ fragment wikiPageAttributes on WikiPage {
   }
   categories(pagination: { limit: -1 }) {
     data {
-      id
       attributes {
-        name
-        short
+        slug
       }
     }
   }
@@ -30,19 +28,8 @@ fragment wikiPageAttributes on WikiPage {
   }
   tags(pagination: { limit: -1 }) {
     data {
-      id
       attributes {
         slug
-        titles(filters: { language: { code: { eq: "en" } } }) {
-          language {
-            data {
-              attributes {
-                code
-              }
-            }
-          }
-          title
-        }
       }
     }
   }
