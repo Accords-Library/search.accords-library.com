@@ -40,7 +40,8 @@ export const synchronizeStrapiAndMeili = async (): Promise<void> => {
       "translations.subtitle",
       "translations.displayable_description",
     ],
-    ["slug", "sortable_updated_date"]
+    ["slug", "sortable_updated_date"],
+    ["filterable_languages"]
   );
 
   // [ VIDEOS ]
@@ -62,7 +63,7 @@ export const synchronizeStrapiAndMeili = async (): Promise<void> => {
     posts.posts?.data.map((item) => strapiToMeiliTransformFunctions.post(item)),
     ["translations.title", "translations.displayable_description"],
     ["sortable_date"],
-    ["hidden"]
+    ["hidden", "filterable_languages"]
   );
 
   // [ WIKI PAGES ]
@@ -76,7 +77,9 @@ export const synchronizeStrapiAndMeili = async (): Promise<void> => {
       "translations.summary",
       "translations.displayable_description",
       "definitions",
-    ]
+    ],
+    undefined,
+    ["filterable_languages"]
   );
 
   // [ WEAPONS ]
@@ -86,7 +89,8 @@ export const synchronizeStrapiAndMeili = async (): Promise<void> => {
     MeiliIndices.WEAPON,
     weapons.weaponStories?.data.map((item) => strapiToMeiliTransformFunctions.weapon(item)),
     ["translations.names", "translations.description"],
-    ["slug"]
+    ["slug"],
+    ["filterable_languages"]
   );
 };
 

@@ -56,6 +56,9 @@ const transformContent: TransformFunction<MeiliIndices.CONTENT> = (data) => {
         };
       }
     ),
+    filterable_languages: filterHasAttributes(translations, [
+      "language.data.attributes.code",
+    ] as const).map(({ language }) => language.data.attributes.code),
     sortable_updated_date: updatedAt,
   };
 };
@@ -105,6 +108,9 @@ const transformPost: TransformFunction<MeiliIndices.POST> = (data) => {
         displayable_description,
       };
     }),
+    filterable_languages: filterHasAttributes(translations, [
+      "language.data.attributes.code",
+    ] as const).map(({ language }) => language.data.attributes.code),
     ...otherAttributes,
   };
 };
@@ -142,6 +148,9 @@ const transformWikiPage: TransformFunction<MeiliIndices.WIKI_PAGE> = (data) => {
         displayable_description,
       };
     }),
+    filterable_languages: filterHasAttributes(translations, [
+      "language.data.attributes.code",
+    ] as const).map(({ language }) => language.data.attributes.code),
     ...otherAttributes,
   };
 };
@@ -192,6 +201,7 @@ const transformWeapon: TransformFunction<MeiliIndices.WEAPON> = (data) => {
     ...otherAttributes,
     categories: [...categories.values()],
     translations: [...translations.values()],
+    filterable_languages: [...translations.keys()],
   };
   return result;
 };
