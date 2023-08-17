@@ -1,5 +1,5 @@
 import { convert } from "html-to-text";
-import { marked } from "marked";
+import { Renderer, marked } from "marked";
 import DOMPurify from "isomorphic-dompurify";
 
 export const prettyInlineTitle = (
@@ -22,7 +22,7 @@ export const prettyMarkdown = (markdown: string): string => {
   const newline = () => "\n";
   const empty = () => "";
 
-  const TxtRenderer: marked.Renderer = {
+  const TxtRenderer: Renderer = {
     // Block elements
     code: escapeBlock,
     blockquote: block,
